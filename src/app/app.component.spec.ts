@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'cadmus-chgc-app'`, () => {
+  it(`should have as title 'cadmus-gisarc-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('cadmus-chgc-app');
+    expect(app.title).toEqual('cadmus-gisarc-app');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('cadmus-chgc-app app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('cadmus-gisarc-app app is running!');
   });
 });
