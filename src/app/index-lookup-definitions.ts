@@ -4,7 +4,7 @@ import { GALLERY_IMAGE_ANNOTATIONS_PART_TYPEID } from '@myrmidon/cadmus-part-img
 
 export const INDEX_LOOKUP_DEFINITIONS: IndexLookupDefinitions = {
   // human-friendly ID for items
-  site: {
+  item: {
     typeId: METADATA_PART_TYPEID,
     name: 'eid',
   },
