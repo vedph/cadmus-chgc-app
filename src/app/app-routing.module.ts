@@ -96,6 +96,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthJwtGuardService],
   },
+  {
+    path: 'items/:iid/img',
+    loadChildren: () =>
+      import('@myrmidon/cadmus-part-img-pg').then(
+        (module) => module.CadmusPartImgPgModule
+      ),
+    canActivate: [AuthJwtGuardService],
+  },
   // cadmus - graph
   {
     path: 'graph',

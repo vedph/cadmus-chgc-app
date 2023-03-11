@@ -4,7 +4,6 @@ import {
   COMMENT_PART_TYPEID,
   DOC_REFERENCES_PART_TYPEID,
   EXTERNAL_IDS_PART_TYPEID,
-  GALLERY_IMAGE_ANNOTATIONS_PART_TYPEID,
   HISTORICAL_EVENTS_PART_TYPEID,
   INDEX_KEYWORDS_PART_TYPEID,
   METADATA_PART_TYPEID,
@@ -20,10 +19,12 @@ import {
   APPARATUS_FRAGMENT_TYPEID,
   ORTHOGRAPHY_FRAGMENT_TYPEID,
 } from '@myrmidon/cadmus-part-philology-ui';
+import { GALLERY_IMAGE_ANNOTATIONS_PART_TYPEID } from '@myrmidon/cadmus-part-img-gallery-image-annotations';
 import { PartEditorKeys } from '@myrmidon/cadmus-core';
 
 const GENERAL = 'general';
 const PHILOLOGY = 'philology';
+const IMG = 'img';
 
 const TOKEN_TEXT_LAYER_PART_TYPEID = 'it.vedph.token-text-layer';
 
@@ -50,7 +51,7 @@ export const PART_EDITOR_KEYS: PartEditorKeys = {
     part: GENERAL,
   },
   [GALLERY_IMAGE_ANNOTATIONS_PART_TYPEID]: {
-    part: GENERAL,
+    part: IMG,
   },
   [HISTORICAL_EVENTS_PART_TYPEID]: {
     part: GENERAL,

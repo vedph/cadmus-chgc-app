@@ -63,7 +63,12 @@ import { CadmusCoreModule } from '@myrmidon/cadmus-core';
 import { CadmusGraphPgModule } from '@myrmidon/cadmus-graph-pg';
 import { CadmusGraphUiModule } from '@myrmidon/cadmus-graph-ui';
 import { CadmusImgAnnotatorModule } from '@myrmidon/cadmus-img-annotator';
-import { CadmusImgGalleryModule, IMAGE_GALLERY_OPTIONS_KEY, IMAGE_GALLERY_SERVICE_KEY, MockGalleryService } from '@myrmidon/cadmus-img-gallery';
+import {
+  CadmusImgGalleryModule,
+  IMAGE_GALLERY_OPTIONS_KEY,
+  IMAGE_GALLERY_SERVICE_KEY,
+  MockGalleryService,
+} from '@myrmidon/cadmus-img-gallery';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { CadmusStateModule } from '@myrmidon/cadmus-state';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
