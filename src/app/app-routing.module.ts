@@ -36,6 +36,13 @@ const routes: Routes = [
     component: ManageUsersPageComponent,
     canActivate: [AuthJwtAdminGuardService],
   },
+  {
+    path: 'demo/layers',
+    loadChildren: () =>
+      import('@myrmidon/cadmus-layer-demo').then(
+        (module) => module.CadmusLayerDemoModule
+      ),
+  },
   // cadmus - items
   {
     path: 'items/:id',

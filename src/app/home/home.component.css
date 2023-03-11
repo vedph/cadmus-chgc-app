@@ -11,5 +11,8 @@
 article {
   column-width: 600px;
   column-count: 4;
-  margin: 0 16px;
+  margin: 16px;
+}
+.emph {
+  font-weight: bold;
 }
