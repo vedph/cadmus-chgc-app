@@ -92,6 +92,11 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { PART_EDITOR_KEYS } from './part-editor-keys';
 import { INDEX_LOOKUP_DEFINITIONS } from './index-lookup-definitions';
 import { ITEM_BROWSER_KEYS } from './item-browser-keys';
+import {
+  CadmusImgGalleryIiifModule,
+  SimpleIiifGalleryOptions,
+  SimpleIiifGalleryService,
+} from '@myrmidon/cadmus-img-gallery-iiif';
 
 @NgModule({
   declarations: [
@@ -152,6 +157,7 @@ import { ITEM_BROWSER_KEYS } from './item-browser-keys';
     AuthJwtLoginModule,
     AuthJwtAdminModule,
     // cadmus bricks
+    CadmusImgGalleryIiifModule,
     CadmusRefsDocReferencesModule,
     CadmusRefsHistoricalDateModule,
     CadmusRefsAssertedIdsModule,
@@ -202,19 +208,40 @@ import { ITEM_BROWSER_KEYS } from './item-browser-keys';
       useClass: AuthJwtInterceptor,
       multi: true,
     },
-    // image gallery: TODO replace with your own
+    // mock image gallery
+    // {
+    //   provide: IMAGE_GALLERY_SERVICE_KEY,
+    //   useClass: MockGalleryService,
+    // },
+    // {
+    //   provide: IMAGE_GALLERY_OPTIONS_KEY,
+    //   useValue: {
+    //     baseUri: '',
+    //     count: 50,
+    //     width: 300,
+    //     height: 400,
+    //   },
+    // },
+    // IIIF image gallery
     {
       provide: IMAGE_GALLERY_SERVICE_KEY,
-      useClass: MockGalleryService,
+      useClass: SimpleIiifGalleryService,
     },
     {
       provide: IMAGE_GALLERY_OPTIONS_KEY,
       useValue: {
         baseUri: '',
-        count: 50,
+        manifestUri:
+          'https://dms-data.stanford.edu/data/manifests/Parker/xj710dc7305/manifest.json',
+        arrayPath: 'sequences[0]/canvases',
+        resourcePath: 'images[0]/resource',
+        labelPath: 'label',
         width: 300,
         height: 400,
-      },
+        targetWidth: 800,
+        targetHeight: -1,
+        pageSize: 6,
+      } as SimpleIiifGalleryOptions,
     },
   ],
   bootstrap: [AppComponent],

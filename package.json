@@ -29,6 +29,7 @@
     "@myrmidon/cadmus-graph-ui": "^2.1.1",
     "@myrmidon/cadmus-img-annotator": "^1.1.1",
     "@myrmidon/cadmus-img-gallery": "^0.0.2",
+    "@myrmidon/cadmus-img-gallery-iiif": "^0.0.2",
     "@myrmidon/cadmus-item-editor": "^2.0.7",
     "@myrmidon/cadmus-item-list": "^2.0.6",
     "@myrmidon/cadmus-item-search": "^2.0.2",

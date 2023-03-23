@@ -41,4 +41,6 @@ Quick reference for [IIIF pattern](https://iiif.io/api/image/3.0/#image-request-
 
 ## History
 
-- 2023-03-23: updated Angular.
+- 2023-03-23:
+  - updated Angular.
+  - replaced mock gallery with IIIF.
