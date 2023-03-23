@@ -10,3 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 1. update version in `env.js` and `ng build`.
 2. `docker build . -t vedph2020/cadmus-chgc-app:0.0.1 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
+
+## History
+
+- 2023-03-23: updated Angular.
