@@ -238,9 +238,11 @@ import {
         labelPath: 'label',
         width: 300,
         height: 400,
-        targetWidth: 800,
+        targetWidth: 1024,
         targetHeight: -1,
         pageSize: 6,
+        // we don't want the covers
+        skip: 6
       } as SimpleIiifGalleryOptions,
     },
   ],
