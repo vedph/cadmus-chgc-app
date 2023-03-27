@@ -241,8 +241,7 @@ import {
         targetWidth: 1024,
         targetHeight: -1,
         pageSize: 6,
-        // we don't want the covers
-        skip: 6
+        // skip: 6
       } as SimpleIiifGalleryOptions,
     },
   ],
