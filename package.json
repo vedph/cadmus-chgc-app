@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-ann": "ng build @myrmidon/cadmus-part-chgc-image-annotations",
+    "build-lib": "npm run build-ann && ng build @myrmidon/cadmus-part-chgc-pg"
   },
   "private": true,
   "dependencies": {
@@ -28,7 +30,7 @@
     "@myrmidon/cadmus-graph-pg": "^2.0.1",
     "@myrmidon/cadmus-graph-ui": "^2.1.1",
     "@myrmidon/cadmus-img-annotator": "^1.1.2",
-    "@myrmidon/cadmus-img-gallery": "^0.0.3",
+    "@myrmidon/cadmus-img-gallery": "^0.0.5",
     "@myrmidon/cadmus-img-gallery-iiif": "^0.0.3",
     "@myrmidon/cadmus-item-editor": "^2.0.7",
     "@myrmidon/cadmus-item-list": "^2.0.6",
@@ -58,6 +60,7 @@
     "@myrmidon/cadmus-thesaurus-list": "^2.0.3",
     "@myrmidon/cadmus-thesaurus-ui": "^2.0.4",
     "@myrmidon/cadmus-ui": "^4.0.6",
+    "@myrmidon/cadmus-ui-custom-action-bar": "^0.0.1",
     "@myrmidon/cadmus-ui-flags-picker": "^1.0.9",
     "@myrmidon/cadmus-ui-pg": "^2.0.0",
     "@myrmidon/ng-mat-tools": "^1.0.0",
@@ -94,6 +97,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "ng-packagr": "^15.2.2",
     "typescript": "~4.9.4"
   }
 }

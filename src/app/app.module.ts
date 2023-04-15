@@ -67,7 +67,6 @@ import {
   CadmusImgGalleryModule,
   IMAGE_GALLERY_OPTIONS_KEY,
   IMAGE_GALLERY_SERVICE_KEY,
-  MockGalleryService,
 } from '@myrmidon/cadmus-img-gallery';
 import { CadmusProfileCoreModule } from '@myrmidon/cadmus-profile-core';
 import { CadmusStateModule } from '@myrmidon/cadmus-state';

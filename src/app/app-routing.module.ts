@@ -104,10 +104,10 @@ const routes: Routes = [
     canActivate: [AuthJwtGuardService],
   },
   {
-    path: 'items/:iid/img',
+    path: 'items/:iid/chgc',
     loadChildren: () =>
-      import('@myrmidon/cadmus-part-img-pg').then(
-        (module) => module.CadmusPartImgPgModule
+      import('@myrmidon/cadmus-part-chgc-pg').then(
+        (module) => module.CadmusPartChgcPgModule
       ),
     canActivate: [AuthJwtGuardService],
   },

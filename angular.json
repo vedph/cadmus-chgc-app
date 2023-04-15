@@ -100,6 +100,72 @@
           }
         }
       }
+    },
+    "@myrmidon/cadmus-part-chgc-image-annotations": {
+      "projectType": "library",
+      "root": "projects/myrmidon/cadmus-part-chgc-image-annotations",
+      "sourceRoot": "projects/myrmidon/cadmus-part-chgc-image-annotations/src",
+      "prefix": "cadmus",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/myrmidon/cadmus-part-chgc-image-annotations/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/myrmidon/cadmus-part-chgc-image-annotations/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/myrmidon/cadmus-part-chgc-image-annotations/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/myrmidon/cadmus-part-chgc-image-annotations/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "@myrmidon/cadmus-part-chgc-pg": {
+      "projectType": "library",
+      "root": "projects/myrmidon/cadmus-part-chgc-pg",
+      "sourceRoot": "projects/myrmidon/cadmus-part-chgc-pg/src",
+      "prefix": "cadmus",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/myrmidon/cadmus-part-chgc-pg/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/myrmidon/cadmus-part-chgc-pg/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/myrmidon/cadmus-part-chgc-pg/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/myrmidon/cadmus-part-chgc-pg/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
     }
   }
 }

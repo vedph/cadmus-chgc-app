@@ -1,0 +1,81 @@
+<form [formGroup]="form" (submit)="save()">
+  <!-- eid -->
+  <div>
+    <mat-form-field *ngIf="idEntries?.length">
+      <mat-label>ID</mat-label>
+      <mat-select [formControl]="eid">
+        <mat-option *ngFor="let e of idEntries" [value]="e.id">{{
+          e.value
+        }}</mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="$any(eid).errors?.required && (eid.dirty || eid.touched)"
+        >ID required</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <!-- renditions -->
+  <fieldset class="form-row">
+    <legend>renditions</legend>
+    <div>
+      <cadmus-thesaurus-tree
+        [entries]="rendEntries"
+        rootLabel="renditions"
+        [renderLabel]="renderLabel"
+        (entryChange)="onEntryChange($event)"
+      ></cadmus-thesaurus-tree>
+    </div>
+    <!-- list -->
+    <table *ngIf="renditions.value.length">
+      <tbody>
+        <tr
+          *ngFor="
+            let e of renditions.value;
+            let i = index;
+            let first = first;
+            let last = last
+          "
+        >
+          <td>
+            <button
+              type="button"
+              mat-icon-button
+              color="warn"
+              (click)="removeRendition(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+          <td>{{ e.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+
+  <div class="form-row">
+    <!-- lineCount -->
+    <mat-form-field style="width: 5em">
+      <mat-label>lines</mat-label>
+      <input matInput [formControl]="lineCount" />
+    </mat-form-field>
+
+    <!-- hasCallSign -->
+    <mat-checkbox [formControl]="hasCallSign">has call sign(s)</mat-checkbox>
+  </div>
+  <div>
+    <!-- note -->
+    <mat-form-field class="long-text">
+      <mat-label>note</mat-label>
+      <textarea matInput [formControl]="note"></textarea>
+      <mat-error
+        *ngIf="$any(note).errors?.required && (note.dirty || note.touched)"
+        >note required</mat-error
+      >
+      <mat-error
+        *ngIf="$any(note).errors?.maxLength && (note.dirty || note.touched)"
+        >note too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+</form>
