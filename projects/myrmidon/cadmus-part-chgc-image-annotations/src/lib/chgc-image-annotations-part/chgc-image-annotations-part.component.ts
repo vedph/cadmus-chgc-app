@@ -187,7 +187,7 @@ export class ChgcImageAnnotationsPartComponent
         this.scrollTo(this.editorRef.nativeElement);
         this.editorRef.nativeElement.focus();
       }
-    }, 450);
+    }, 0);
   }
 
   public closeAnnotation(): void {
@@ -195,12 +195,12 @@ export class ChgcImageAnnotationsPartComponent
     this.editedIndex = -1;
   }
 
-  public saveAnnotation(): void {
+  public saveAnnotation(annotation: ChgcImageAnnotation): void {
     if (this.editedIndex === -1) {
       return;
     }
     const annotations = [...this.annotations.value];
-    annotations[this.editedIndex] = this.editedAnnotation!;
+    annotations[this.editedIndex] = annotation;
     this.annotations.setValue(annotations);
     this.annotations.updateValueAndValidity();
     this.annotations.markAsDirty();

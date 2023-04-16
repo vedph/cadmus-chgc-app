@@ -32,7 +32,8 @@
               [idEntries]="idEntries"
               [rendEntries]="rendEntries"
               [annotation]="editedAnnotation"
-              (annotationChange)="saveAnnotation()"
+              (annotationChange)="saveAnnotation($event)"
+              (editorClose)="closeAnnotation()"
             >
             </cadmus-chgc-image-annotation>
           </mat-expansion-panel>
