@@ -8,8 +8,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 🐋 Quick Docker image build:
 
-1. update version in `env.js` and `ng build`.
-2. `docker build . -t vedph2020/cadmus-chgc-app:0.0.1 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
+1. `npm run build-lib`;
+2. update version in `env.js` and `ng build`;
+3. `docker build . -t vedph2020/cadmus-chgc-app:0.0.2 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
 
 ## IIIF
 
@@ -41,6 +42,9 @@ Quick reference for [IIIF pattern](https://iiif.io/api/image/3.0/#image-request-
 
 ## History
 
+### 0.0.2
+
+- 2023-04-16: added CHGC parts libraries.
 - 2023-04-13: updated Angular and packages.
 - 2023-03-27: updated packages.
 
