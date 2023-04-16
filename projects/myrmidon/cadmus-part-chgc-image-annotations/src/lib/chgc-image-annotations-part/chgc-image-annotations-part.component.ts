@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormControl,
   FormBuilder,
@@ -56,6 +62,9 @@ export class ChgcImageAnnotationsPartComponent
   public editedIndex: number;
   public editedAnnotation?: ChgcImageAnnotation;
   public actions: BarCustomAction[];
+
+  @ViewChild('editor', { static: false })
+  public editorRef?: ElementRef;
 
   constructor(
     authService: AuthJwtService,
@@ -166,9 +175,19 @@ export class ChgcImageAnnotationsPartComponent
     this.annotations.markAsDirty();
   }
 
+  private scrollTo(element: HTMLElement) {
+    element.scrollIntoView();
+  }
+
   public editAnnotation(annotation: ChgcImageAnnotation, index: number): void {
     this.editedAnnotation = annotation;
     this.editedIndex = index;
+    setTimeout(() => {
+      if (this.editorRef?.nativeElement) {
+        this.scrollTo(this.editorRef.nativeElement);
+        this.editorRef.nativeElement.focus();
+      }
+    }, 450);
   }
 
   public closeAnnotation(): void {
