@@ -19,70 +19,20 @@
     <p *ngIf="!logged" class="emph">
       Please <a href="/login">login</a> to start playing with the demo.
     </p>
-    <p>
-      This is just a stub for a proof-of-concept editor. The image gallery used
-      here is just a mock service, which will be eventually replaced by a client
-      for any kind of image service scenario, from a set of web image files to a
-      simple BLOB storage, up to a IIIF service. The current service is a mock
-      image service which provides images at a requested resolution.
-    </p>
-    <h3>Data Architecture</h3>
-    <p>
-      To keep things simple, let us start from a user story: whatever the
-      imagined workflow, essentially the project starts from manuscripts images:
-      for each page, you should somehow define a number of geometric regions in
-      it, and at least assign a unique ID to each. Then, a number of highly
-      structured data should be linked to each of these regions, regarding
-      shapes features, text, apparatus, comment, translation, characters with
-      their genealogy, etc.
-    </p>
-    <p>
-      All these data are created inside this editing system, based on a
-      centralized database, allowing you doing all these tasks in parallel,
-      where the whole team logs in and works collaboratively to build up all
-      these complex contents, linking them together.
-    </p>
-    <h3>Entity Types</h3>
-    <p>
-      In our scenario we would at least have 4 entities, which you are going to
-      find in this editor demo:
-    </p>
-    <ul>
-      <li><em>images</em>, representing manuscript pages.</li>
-      <li>
-        <em>shapes</em>, representing any relevant drawing on the page; it might
-        be a closed shape, a line, a curve, etc.; it might contain other shapes,
-        text, etc.
-      </li>
-      <li>
-        <em>texts</em>, representing any self-contained text in the page, mostly
-        included in a shape.
-      </li>
-      <li>
-        <em>characters</em>, representing the characters cited in the text and
-        being part of the genealogy described by it.
-      </li>
-    </ul>
-    <p>
-      This is a minimalist inventory; yet, types are not only be unlimited, but
-      also expandable in time, without affecting existing data.
-    </p>
     <h3>Composable Data and Composable Editor</h3>
     <p>
-      Imagine each of these entities as a box. You can put any type and number
-      of objects inside it. Each object is modeled to encode a group of coherent
-      features; many of these objects together put in the same box build up an
-      aggregated super-model. Also, each of these objects has its own editor UI.
-      So, the editor itself is built by aggregation, too.
+      The purpose of this editor is just annotating images; so its data
+      architecture is minimalist, and the only entity type is an image. Each
+      image corresponds to a page, and is provided by an IIIF server. Imagine
+      each of these entities as a box: this is a Cadmus "item". You can put any
+      type and number of objects ("parts") inside it. Each object is modeled to
+      encode a group of coherent features; many of these objects together put in
+      the same box build up an aggregated super-model. Also, each of these
+      objects has its own editor UI. So, the editor itself is built by
+      aggregation, too.
     </p>
     <p>
-      Once logged in, open the items list. Each item is a "box". Inside it, you
-      will find objects like geometrical regions, metadata, categories,
-      keywords, documental references, bibliography, external ID lists,
-      comments, notes, text, translation, etc.
-    </p>
-    <p>
-      Also, many objects in the text box represent <em>layers</em> on top of the
+      Also, objects in the text box may represent <em>layers</em> on top of the
       base text: each layer is specialized in representing a specific type of
       textual annotations, like critical apparatus, comment, orthography, links,
       etc. To add such annotations, you just select the portion of text to
@@ -100,48 +50,38 @@
       structured data into documents.
     </p>
     <p>
-      Here, surely we would need an additional object to represent specific
-      features of shapes, and eventually another one to represent their
-      connections to other shapes or text. Also, characters would require more
-      than their name and generic data; we might want to add a genealogic
-      object, etc. At any rate, even this minimalist setup should be enough to
-      show the general idea of this open and modular architecture. For more
-      information, please see the
+      In the case of this editor, you just have image items corresponding to
+      manuscript pages, and the only part you are going to use is the
+      annotations part. This includes geometrical regions drawn on top of the
+      image, and provided with a minimal set of metadata.
+    </p>
+    <p>
+      Once logged in, open the items list, add an item for a page, select its
+      "facet" (=type; here you have a single type, image), and enter its
+      essential metadata, like title and description. Saving it will create a
+      "box".
+    </p>
+    <p>
+      In that box, add a new part, the image annotations part. Pick an image
+      from the gallery, and draw on top of it, while editing metadata for each
+      annotation. When you are done, save the part. You can edit any part of any
+      item at any time.
+    </p>
+    <p>
+      The top menu allows you to search data (fully validated and indexed
+      whenever you save them), explore or edit the semantic graph which might be
+      eventually projected from data you enter (this is not the case of this
+      project), and browse and edit the various taxonomies (<em>Thesauri</em>)
+      provided for part editors.
+    </p>
+    <p>
+      For more information, please see the
       <a
         href="https://myrmex.github.io/overview/cadmus"
         target="_blank"
         rel="noopener"
         >Cadmus web page</a
       >.
-    </p>
-    <h3>How to Play</h3>
-    <p *ngIf="logged" class="emph">
-      Open <a href="/items">items</a> to start browsing some mock data.
-    </p>
-    <p>
-      Mock data generation is part of the system architecture, and usually just
-      ensures that generated data are formally correct; their content is just
-      garbage, so don't rely on them to make sense of the underlying model, but
-      rather refer to the UI itself. Mock data are there only as placeholders.
-    </p>
-    <p>
-      Data types (images, shapes, etc.) are color-coded; click the edit button
-      to see the objects included in them. Mock data are random, so unless a
-      specific object type is defined as required it might or not be present. If
-      it is not present, you can add it via the add button after picking it from
-      the dropdown.
-    </p>
-    <p>
-      The top menu allows you to search data (fully validated and indexed
-      whenever you save them), explore or edit the semantic graph which might be
-      eventually projected from data you enter, and browse and edit the various
-      taxonomies (<em>Thesauri</em>) provided for the project. Of course, these
-      taxonomies too are just mock data.
-    </p>
-    <p>
-      Finally, the demo menu allows you to play with the coordinates system
-      behind the text layer mechanism, even though it will probably be easier
-      just opening a layer and playing with it.
     </p>
   </article>
 </div>
