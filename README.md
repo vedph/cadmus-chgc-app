@@ -42,6 +42,8 @@ Quick reference for [IIIF pattern](https://iiif.io/api/image/3.0/#image-request-
 
 ## History
 
+- 2023-05-11: updated to Angular 16.
+
 ### 0.0.2
 
 - 2023-04-16: added CHGC parts libraries.
