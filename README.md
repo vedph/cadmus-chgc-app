@@ -40,6 +40,10 @@ Quick reference for [IIIF pattern](https://iiif.io/api/image/3.0/#image-request-
 - quality: The quality of the returned image
 - format: The format of the returned image
 
+### Alternative Source
+
+Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD0000263308/manifest.json>.
+
 ## History
 
 - 2023-05-11: updated to Angular 16.
