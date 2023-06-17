@@ -19,9 +19,8 @@ import { EditedObject, ModelEditorComponentBase } from '@myrmidon/cadmus-ui';
 import { ThesauriSet, ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
   GalleryImage,
-  GalleryOptions,
+  GalleryOptionsService,
   GalleryService,
-  IMAGE_GALLERY_OPTIONS_KEY,
   IMAGE_GALLERY_SERVICE_KEY,
 } from '@myrmidon/cadmus-img-gallery';
 import {
@@ -37,7 +36,7 @@ import {
 
 /**
  * ChgcImageAnnotationsPart editor component.
- * Thesauri: gallery-image-annotation-filters, chgc-ids, chgc-renditions.
+ * Thesauri: gallery-image-annotation-filters, chgc-ids.
  */
 @Component({
   selector: 'cadmus-chgc-image-annotations-part',
@@ -54,8 +53,6 @@ export class ChgcImageAnnotationsPartComponent
   public filterEntries: ThesaurusEntry[] | undefined;
   // chgc-ids
   public idEntries: ThesaurusEntry[] | undefined;
-  // chgc-renditions
-  public rendEntries: ThesaurusEntry[] | undefined;
 
   public image?: GalleryImage;
   public annotations: FormControl<ChgcImageAnnotation[]>;
@@ -71,8 +68,7 @@ export class ChgcImageAnnotationsPartComponent
     formBuilder: FormBuilder,
     @Inject(IMAGE_GALLERY_SERVICE_KEY)
     private _galleryService: GalleryService,
-    @Inject(IMAGE_GALLERY_OPTIONS_KEY)
-    private _options: GalleryOptions
+    private _options: GalleryOptionsService
   ) {
     super(authService, formBuilder);
     this.tabIndex = 0;
@@ -116,12 +112,6 @@ export class ChgcImageAnnotationsPartComponent
     } else {
       this.idEntries = undefined;
     }
-    key = 'chgc-renditions';
-    if (this.hasThesaurus(key)) {
-      this.rendEntries = thesauri[key].entries;
-    } else {
-      this.rendEntries = undefined;
-    }
   }
 
   private updateForm(part?: ChgcImageAnnotationsPart | null): void {
@@ -161,7 +151,7 @@ export class ChgcImageAnnotationsPartComponent
     const options = { ...this._options, width: 600, height: 800 };
 
     this._galleryService
-      .getImage(image.id, options)
+      .getImage(image.id, this._options.get())
       .pipe(take(1))
       .subscribe((image) => {
         this.image = image!;

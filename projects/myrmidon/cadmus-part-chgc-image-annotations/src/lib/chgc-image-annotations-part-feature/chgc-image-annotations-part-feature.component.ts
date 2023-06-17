@@ -33,6 +33,6 @@ export class ChgcImageAnnotationsPartFeatureComponent
   }
 
   protected override getReqThesauriIds(): string[] {
-    return ['gallery-image-annotation-filters', 'chgc-ids', 'chgc-renditions'];
+    return ['gallery-image-annotation-filters', 'chgc-ids'];
   }
 }

@@ -15,63 +15,23 @@
     </mat-form-field>
   </div>
 
-  <!-- renditions -->
-  <fieldset class="form-row">
-    <legend>renditions</legend>
-    <div>
-      <cadmus-thesaurus-tree
-        [entries]="rendEntries"
-        rootLabel="renditions"
-        [renderLabel]="renderLabel"
-        (entryChange)="onEntryChange($event)"
-      ></cadmus-thesaurus-tree>
-    </div>
-    <!-- list -->
-    <table *ngIf="renditions.value.length">
-      <tbody>
-        <tr
-          *ngFor="
-            let e of renditions.value;
-            let i = index;
-            let first = first;
-            let last = last
-          "
-        >
-          <td>
-            <button
-              type="button"
-              mat-icon-button
-              color="warn"
-              (click)="removeRendition(i)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-          <td>{{ e.value }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </fieldset>
-
-  <div class="form-row">
-    <!-- lineCount -->
-    <mat-form-field style="width: 5em">
-      <mat-label>lines</mat-label>
-      <input matInput type="number" [formControl]="lineCount" />
-    </mat-form-field>
-
-    <!-- hasCallSign -->
-    <mat-checkbox [formControl]="hasCallSign">has call sign(s)</mat-checkbox>
-  </div>
+  <!-- label -->
   <div>
-    <!-- note -->
+    <mat-form-field>
+      <mat-label>label</mat-label>
+      <input matInput [formControl]="label" />
+      <mat-error
+        *ngIf="$any(label).errors?.maxLength && (label.dirty || label.touched)"
+        >label too long</mat-error
+      >
+    </mat-form-field>
+  </div>
+
+  <!-- note -->
+  <div>
     <mat-form-field class="long-text">
       <mat-label>note</mat-label>
       <textarea matInput [formControl]="note"></textarea>
-      <mat-error
-        *ngIf="$any(note).errors?.required && (note.dirty || note.touched)"
-        >note required</mat-error
-      >
       <mat-error
         *ngIf="$any(note).errors?.maxLength && (note.dirty || note.touched)"
         >note too long</mat-error

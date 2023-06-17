@@ -3,9 +3,7 @@ import { GalleryImageAnnotation } from '@myrmidon/cadmus-img-gallery';
 
 export interface ChgcImageAnnotation extends GalleryImageAnnotation {
   eid: string;
-  renditions?: string[];
-  lineCount?: number;
-  hasCallSign?: boolean;
+  label?: string;
   note?: string;
 }
 
@@ -120,17 +118,8 @@ export const CHGC_IMAGE_ANNOTATIONS_PART_SCHEMA = {
           eid: {
             type: 'string',
           },
-          renditions: {
-            type: 'array',
-            items: {
-              type: 'string',
-            },
-          },
-          lineCount: {
-            type: 'integer',
-          },
-          hasCallSign: {
-            type: 'boolean',
+          label: {
+            type: 'string',
           },
           note: {
             type: 'string',

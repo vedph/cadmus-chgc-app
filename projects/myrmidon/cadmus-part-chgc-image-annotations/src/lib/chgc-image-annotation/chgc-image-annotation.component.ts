@@ -7,8 +7,6 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { renderLabelFromLastColon } from '@myrmidon/cadmus-ui';
-
 import { ChgcImageAnnotation } from '../chgc-image-annotations';
 
 /**
@@ -40,9 +38,6 @@ export class ChgcImageAnnotationComponent {
   // chgc-ids
   @Input()
   public idEntries: ThesaurusEntry[] | undefined;
-  // chgc-renditions
-  @Input()
-  public rendEntries: ThesaurusEntry[] | undefined;
 
   @Output()
   public editorClose: EventEmitter<void>;
@@ -51,9 +46,7 @@ export class ChgcImageAnnotationComponent {
   public annotationChange: EventEmitter<ChgcImageAnnotation>;
 
   public eid: FormControl<string>;
-  public renditions: FormControl<ThesaurusEntry[]>;
-  public lineCount: FormControl<number>;
-  public hasCallSign: FormControl<boolean>;
+  public label: FormControl<string | null>;
   public note: FormControl<string | null>;
   public form: FormGroup;
 
@@ -63,17 +56,11 @@ export class ChgcImageAnnotationComponent {
       validators: [Validators.required, Validators.maxLength(50)],
       nonNullable: true,
     });
-    this.renditions = formBuilder.control([], {
-      nonNullable: true,
-    });
-    this.lineCount = formBuilder.control(0, { nonNullable: true });
-    this.hasCallSign = formBuilder.control(false, { nonNullable: true });
+    this.label = formBuilder.control(null, Validators.maxLength(100));
     this.note = formBuilder.control(null, Validators.maxLength(1000));
     this.form = formBuilder.group({
       eid: this.eid,
-      renditions: this.renditions,
-      lineCount: this.lineCount,
-      hasCallSign: this.hasCallSign,
+      label: this.label,
       note: this.note,
     });
     // events
@@ -87,13 +74,7 @@ export class ChgcImageAnnotationComponent {
       return;
     }
     this.eid.setValue(annotation.eid);
-    this.renditions.setValue(
-      annotation.renditions?.map(
-        (id) => this.rendEntries?.find((e) => e.id === id) || { id, value: id }
-      ) || []
-    );
-    this.lineCount.setValue(annotation.lineCount || 0);
-    this.hasCallSign.setValue(annotation.hasCallSign || false);
+    this.label.setValue(annotation.label || null);
     this.note.setValue(annotation.note || null);
     this.form.markAsPristine();
   }
@@ -102,9 +83,7 @@ export class ChgcImageAnnotationComponent {
     return {
       ...this._annotation!,
       eid: this.eid.value,
-      renditions: this.renditions.value.map((e) => e.id),
-      lineCount: this.lineCount.value,
-      hasCallSign: this.hasCallSign.value,
+      label: this.label.value || undefined,
       note: this.note.value || undefined,
     };
   }
@@ -119,29 +98,5 @@ export class ChgcImageAnnotationComponent {
     }
     this._annotation = this.getModel();
     this.annotationChange.emit(this._annotation);
-  }
-
-  public onEntryChange(entry: ThesaurusEntry): void {
-    const renditions = [...this.renditions.value];
-    if (renditions.find((e) => e.id === entry.id)) {
-      return;
-    }
-    renditions.push(entry);
-    renditions.sort((a, b) => a.value.localeCompare(b.value));
-    this.renditions.setValue(renditions);
-    this.renditions.markAsDirty();
-    this.renditions.updateValueAndValidity();
-  }
-
-  public removeRendition(index: number): void {
-    const renditions = [...this.renditions.value];
-    renditions.splice(index, 1);
-    this.renditions.setValue(renditions);
-    this.renditions.markAsDirty();
-    this.renditions.updateValueAndValidity();
-  }
-
-  public renderLabel(label: string): string {
-    return renderLabelFromLastColon(label);
   }
 }
