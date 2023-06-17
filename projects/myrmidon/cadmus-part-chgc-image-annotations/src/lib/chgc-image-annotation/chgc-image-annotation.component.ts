@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 
 import { ChgcImageAnnotation } from '../chgc-image-annotations';
+import { IdLookupService } from './id-lookup.service';
 
 /**
  * Editor for CHGC image annotations metadata.
@@ -16,6 +17,7 @@ import { ChgcImageAnnotation } from '../chgc-image-annotations';
   selector: 'cadmus-chgc-image-annotation',
   templateUrl: './chgc-image-annotation.component.html',
   styleUrls: ['./chgc-image-annotation.component.css'],
+  providers: [IdLookupService],
 })
 export class ChgcImageAnnotationComponent {
   private _annotation: ChgcImageAnnotation | undefined;
@@ -45,17 +47,17 @@ export class ChgcImageAnnotationComponent {
   @Output()
   public annotationChange: EventEmitter<ChgcImageAnnotation>;
 
-  public eid: FormControl<string>;
+  public eid: FormControl<ThesaurusEntry | null>;
   public label: FormControl<string | null>;
   public note: FormControl<string | null>;
   public form: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(
+    formBuilder: FormBuilder,
+    public idLookupService: IdLookupService
+  ) {
     // form
-    this.eid = formBuilder.control('', {
-      validators: [Validators.required, Validators.maxLength(50)],
-      nonNullable: true,
-    });
+    this.eid = formBuilder.control(null, Validators.required);
     this.label = formBuilder.control(null, Validators.maxLength(100));
     this.note = formBuilder.control(null, Validators.maxLength(1000));
     this.form = formBuilder.group({
@@ -73,7 +75,8 @@ export class ChgcImageAnnotationComponent {
       this.form.reset();
       return;
     }
-    this.eid.setValue(annotation.eid);
+    // in CHGC id is always equal to value
+    this.eid.setValue({ id: annotation.eid, value: annotation.eid });
     this.label.setValue(annotation.label || null);
     this.note.setValue(annotation.note || null);
     this.form.markAsPristine();
@@ -82,10 +85,16 @@ export class ChgcImageAnnotationComponent {
   private getModel(): ChgcImageAnnotation {
     return {
       ...this._annotation!,
-      eid: this.eid.value,
+      eid: this.eid.value?.id || '',
       label: this.label.value || undefined,
       note: this.note.value || undefined,
     };
+  }
+
+  public onItemChange(item: ThesaurusEntry | undefined) {
+    this.eid.setValue(item || null);
+    this.eid.markAsDirty();
+    this.eid.updateValueAndValidity();
   }
 
   public cancel(): void {

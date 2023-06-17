@@ -46,6 +46,7 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+- 2023-06-17: refactored part.
 - 2023-06-13: updated Angular and packages.
 - 2023-05-11: updated to Angular 16.
 

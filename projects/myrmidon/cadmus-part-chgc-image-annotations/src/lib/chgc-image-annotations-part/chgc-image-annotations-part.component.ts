@@ -174,8 +174,11 @@ export class ChgcImageAnnotationsPartComponent
     this.editedIndex = index;
     setTimeout(() => {
       if (this.editorRef?.nativeElement) {
+        console.log('Setting focus to editorRef.nativeElement');
         this.scrollTo(this.editorRef.nativeElement);
         this.editorRef.nativeElement.focus();
+      } else {
+        console.warn('No editorRef element');
       }
     }, 0);
   }

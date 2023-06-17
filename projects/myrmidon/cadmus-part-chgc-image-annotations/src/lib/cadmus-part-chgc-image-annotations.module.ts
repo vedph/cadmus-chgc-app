@@ -19,6 +19,7 @@ import { CadmusCoreModule } from '@myrmidon/cadmus-core';
 import { CadmusImgAnnotatorModule } from '@myrmidon/cadmus-img-annotator';
 import { CadmusImgGalleryModule } from '@myrmidon/cadmus-img-gallery';
 import { CadmusRefsAssertedIdsModule } from '@myrmidon/cadmus-refs-asserted-ids';
+import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
 import { CadmusRefsDocReferencesModule } from '@myrmidon/cadmus-refs-doc-references';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
 import { CadmusUiPgModule } from '@myrmidon/cadmus-ui-pg';
@@ -62,6 +63,7 @@ import { ChgcImageAnnotationsPartFeatureComponent } from './chgc-image-annotatio
     CadmusImgGalleryModule,
     CadmusRefsAssertedIdsModule,
     CadmusRefsDocReferencesModule,
+    CadmusRefsLookupModule
   ],
   exports: [
     ChgcImageAnnotationsPartComponent,
