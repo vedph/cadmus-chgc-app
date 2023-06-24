@@ -15,6 +15,7 @@ import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.
 import { RegisterUserPageComponent } from './register-user-page/register-user-page.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { GalleryOptionsComponent } from './gallery-options/gallery-options.component';
 
 const routes: Routes = [
   // local home
@@ -42,6 +43,12 @@ const routes: Routes = [
       import('@myrmidon/cadmus-layer-demo').then(
         (module) => module.CadmusLayerDemoModule
       ),
+  },
+  // chgc
+  {
+    path: 'options',
+    component: GalleryOptionsComponent,
+    canActivate: [AuthJwtGuardService],
   },
   // cadmus - items
   {

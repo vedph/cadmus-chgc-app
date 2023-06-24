@@ -46,7 +46,9 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
-- 2023-06-24: added scroll behavior in editor.
+- 2023-06-24:
+  - added scroll behavior in editor.
+  - added gallery options page.
 - 2023-06-23: updated Angular and packages.
 
 ### 1.0.0

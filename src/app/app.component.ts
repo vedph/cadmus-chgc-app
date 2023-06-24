@@ -11,6 +11,11 @@ import {
 } from '@myrmidon/auth-jwt-login';
 import { EnvService } from '@myrmidon/ng-tools';
 import { AppRepository } from '@myrmidon/cadmus-state';
+import {
+  GalleryOptions,
+  GalleryOptionsService,
+} from '@myrmidon/cadmus-img-gallery';
+import { ChgcGalleryOptions } from './gallery-options/gallery-options.component';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public logged?: boolean;
   public itemBrowsers?: ThesaurusEntry[];
   public version: string;
+  public galleryId?: string;
 
   constructor(
     @Inject('itemBrowserKeys')
@@ -33,9 +39,14 @@ export class AppComponent implements OnInit, OnDestroy {
     private _gravatarService: GravatarService,
     private _appRepository: AppRepository,
     private _router: Router,
-    env: EnvService
+    env: EnvService,
+    options: GalleryOptionsService
   ) {
     this.version = env.get('version') || '';
+    this.galleryId = (options.get() as ChgcGalleryOptions)?.id;
+    options.select().subscribe((o: GalleryOptions) => {
+      this.galleryId = (o as ChgcGalleryOptions)?.id;
+    });
   }
 
   ngOnInit(): void {

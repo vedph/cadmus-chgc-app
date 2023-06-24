@@ -30,35 +30,48 @@
 
     <!-- search menu -->
     <button mat-button routerLink="/search" *ngIf="logged">Search</button>
-    <!-- graph menu -->
-    <button mat-button routerLink="/graph" *ngIf="logged">Graph</button>
-    <!-- thesauri menu -->
+
+    <!-- resources menu -->
     <button
       type="button"
       mat-button
-      routerLink="/thesauri"
-      *ngIf="
-        user && (user.roles.includes('admin') || user.roles.includes('editor'))
-      "
+      [matMenuTriggerFor]="resourceMenu"
+      *ngIf="logged"
     >
-      Thesauri
+      Resources
     </button>
+    <mat-menu #resourceMenu>
+      <a
+        mat-menu-item
+        routerLink="/thesauri"
+        *ngIf="
+          user &&
+          (user.roles.includes('admin') || user.roles.includes('editor'))
+        "
+        >Thesauri</a
+      >
+      <a mat-menu-item routerLink="/options">Options</a>
+    </mat-menu>
+
+    <!-- graph menu -->
+    <!-- <button mat-button routerLink="/graph" *ngIf="logged">Graph</button> -->
 
     <!-- demo menu -->
-    <button type="button" mat-button [matMenuTriggerFor]="demoMenu">
+    <!-- <button type="button" mat-button [matMenuTriggerFor]="demoMenu">
       Demo
     </button>
     <mat-menu #demoMenu>
       <button type="button" mat-menu-item routerLink="/demo/layers">
         Text Layers
       </button>
-    </mat-menu>
+    </mat-menu> -->
 
     <span class="tb-fill-remaining-space"></span>
 
     <!-- user -->
     <div *ngIf="user" fxLayout="row" fxLayoutAlign="start center">
       <!-- indicators -->
+      <span id="gallery" *ngIf="galleryId">{{galleryId}}</span>
       <img
         alt="avatar"
         [src]="getGravatarUrl(user.email, 32)"

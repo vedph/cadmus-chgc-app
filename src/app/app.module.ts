@@ -96,6 +96,7 @@ import {
   SimpleIiifGalleryOptions,
   SimpleIiifGalleryService,
 } from '@myrmidon/cadmus-img-gallery-iiif';
+import { GalleryOptionsComponent } from './gallery-options/gallery-options.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +106,7 @@ import {
     ManageUsersPageComponent,
     RegisterUserPageComponent,
     ResetPasswordComponent,
+    GalleryOptionsComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -229,6 +231,7 @@ import {
     {
       provide: IMAGE_GALLERY_OPTIONS_KEY,
       useValue: {
+        id: 'ccc-ms029',
         baseUri: '',
         manifestUri:
           'https://dms-data.stanford.edu/data/manifests/Parker/xj710dc7305/manifest.json',
