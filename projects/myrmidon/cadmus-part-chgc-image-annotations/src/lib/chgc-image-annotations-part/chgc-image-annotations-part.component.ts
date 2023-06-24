@@ -60,7 +60,7 @@ export class ChgcImageAnnotationsPartComponent
   public editedAnnotation?: ChgcImageAnnotation;
   public actions: BarCustomAction[];
 
-  @ViewChild('editor', { static: false })
+  @ViewChild('editor', { static: false, read: ElementRef })
   public editorRef?: ElementRef;
 
   constructor(
@@ -148,7 +148,7 @@ export class ChgcImageAnnotationsPartComponent
 
   public onImagePick(image: GalleryImage): void {
     // get the single image as we need the "full" size
-    const options = { ...this._options, width: 600, height: 800 };
+    // const options = { ...this._options, width: 600, height: 800 };
 
     this._galleryService
       .getImage(image.id, this._options.get())
@@ -166,7 +166,11 @@ export class ChgcImageAnnotationsPartComponent
   }
 
   private scrollTo(element: HTMLElement) {
-    element.scrollIntoView();
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'start',
+    });
   }
 
   public editAnnotation(annotation: ChgcImageAnnotation, index: number): void {
