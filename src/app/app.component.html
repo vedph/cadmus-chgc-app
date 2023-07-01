@@ -29,7 +29,9 @@
     </ng-container>
 
     <!-- search menu -->
-    <button mat-button routerLink="/search" *ngIf="logged">Search</button>
+    <button type="button" mat-button routerLink="/search" *ngIf="logged">
+      Search
+    </button>
 
     <!-- resources menu -->
     <button
@@ -50,6 +52,7 @@
         "
         >Thesauri</a
       >
+      <a mat-menu-item routerLink="/export">Export TEI</a>
       <a mat-menu-item routerLink="/options">Options</a>
     </mat-menu>
 
@@ -71,7 +74,7 @@
     <!-- user -->
     <div *ngIf="user" fxLayout="row" fxLayoutAlign="start center">
       <!-- indicators -->
-      <span id="gallery" *ngIf="galleryId">{{galleryId}}</span>
+      <span id="gallery" *ngIf="galleryId">{{ galleryId }}</span>
       <img
         alt="avatar"
         [src]="getGravatarUrl(user.email, 32)"

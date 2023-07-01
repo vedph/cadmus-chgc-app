@@ -97,6 +97,7 @@ import {
   SimpleIiifGalleryService,
 } from '@myrmidon/cadmus-img-gallery-iiif';
 import { GalleryOptionsComponent } from './gallery-options/gallery-options.component';
+import { ExportGroupComponent } from './export-group/export-group.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { GalleryOptionsComponent } from './gallery-options/gallery-options.compo
     RegisterUserPageComponent,
     ResetPasswordComponent,
     GalleryOptionsComponent,
+    ExportGroupComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -9,8 +9,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 🐋 Quick Docker image build:
 
 1. `npm run build-lib`;
-2. update version in `env.js` and `ng build`;
-3. `docker build . -t vedph2020/cadmus-chgc-app:1.0.0 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
+2. update version in `env.js` and then `ng build`;
+3. `docker build . -t vedph2020/cadmus-chgc-app:1.0.1 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
 
 ## IIIF
 
@@ -46,6 +46,9 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+### 1.0.1
+
+- 2023-07-01: added export.
 - 2023-06-24:
   - added scroll behavior in editor.
   - added gallery options page.

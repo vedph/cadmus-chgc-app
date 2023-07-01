@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Export TEI</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-progress-bar mode="indeterminate" *ngIf="busy"></mat-progress-bar>
+    <fieldset>
+      <form [formGroup]="form" (submit)="export()">
+        <legend>group ID</legend>
+        <div class="form-row">
+          <mat-form-field>
+            <mat-label>group ID</mat-label>
+            <input matInput [formControl]="groupId" />
+            <mat-error
+              *ngIf="
+                $any(groupId).errors?.required &&
+                (groupId.dirty || groupId.touched)
+              "
+              >group ID required</mat-error
+            >
+            <mat-error
+              *ngIf="
+                $any(groupId).errors?.maxLength &&
+                (groupId.dirty || groupId.touched)
+              "
+              >group ID too long</mat-error
+            >
+          </mat-form-field>
+          <button
+            type="submit"
+            mat-flat-button
+            color="primary"
+            [disabled]="form.invalid"
+          >
+            export
+          </button>
+          <button
+            type="button"
+            mat-flat-button
+            [disabled]="busy || !xml.value"
+            (click)="save()"
+          >
+            save
+          </button>
+        </div>
+      </form>
+    </fieldset>
+    <div id="xml">
+      <ngx-monaco-editor
+        [options]="editorOptions"
+        [formControl]="xml"
+      ></ngx-monaco-editor>
+    </div>
+  </mat-card-content>
+</mat-card>
