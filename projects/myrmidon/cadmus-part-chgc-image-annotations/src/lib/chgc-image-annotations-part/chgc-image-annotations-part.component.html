@@ -16,26 +16,29 @@
             [customActions]="actions"
             (annotationsChange)="onAnnotationsChange($any($event))"
             (actionRequest)="onActionRequest($event)"
-          ></cadmus-gallery-img-annotator>
-          <!-- metadata -->
-          <mat-expansion-panel
-            #editor
-            [disabled]="!editedAnnotation"
-            [expanded]="editedAnnotation"
           >
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                annotation #{{ editedIndex + 1 }}</mat-panel-title
-              ></mat-expansion-panel-header
-            >
-            <cadmus-chgc-image-annotation
-              [idEntries]="idEntries"
-              [annotation]="editedAnnotation"
-              (annotationChange)="saveAnnotation($event)"
-              (editorClose)="closeAnnotation()"
-            >
-            </cadmus-chgc-image-annotation>
-          </mat-expansion-panel>
+            <div class="after-list">
+              <!-- metadata -->
+              <mat-expansion-panel
+                #editor
+                [disabled]="!editedAnnotation"
+                [expanded]="editedAnnotation"
+              >
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    annotation #{{ editedIndex + 1 }}</mat-panel-title
+                  ></mat-expansion-panel-header
+                >
+                <cadmus-chgc-image-annotation
+                  [idEntries]="idEntries"
+                  [annotation]="editedAnnotation"
+                  (annotationChange)="saveAnnotation($event)"
+                  (editorClose)="closeAnnotation()"
+                >
+                </cadmus-chgc-image-annotation>
+              </mat-expansion-panel>
+            </div>
+          </cadmus-gallery-img-annotator>
         </mat-tab>
 
         <!-- gallery -->
