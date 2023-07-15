@@ -1,6 +1,21 @@
 import { Part } from '@myrmidon/cadmus-core';
 import { GalleryImageAnnotation } from '@myrmidon/cadmus-img-gallery';
 
+/**
+ * The payload of a CHGC image annotation. This is used as part of an
+ * editing model (the T in ListAnnotation<T>), including both the original
+ * Annotorious annotation and this payload.
+ */
+export interface ChgcAnnotationPayload {
+  eid: string;
+  label?: string;
+  note?: string;
+}
+
+/**
+ * The CHGC image annotation as the component of a CHGC
+ * image annotations part.
+ */
 export interface ChgcImageAnnotation extends GalleryImageAnnotation {
   eid: string;
   label?: string;

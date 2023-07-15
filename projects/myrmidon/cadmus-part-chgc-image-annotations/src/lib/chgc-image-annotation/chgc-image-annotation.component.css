@@ -20,3 +20,7 @@ legend {
   width: 100%;
   max-width: 800px;
 }
+.center-content {
+  display: flex;
+  justify-content: center;
+}

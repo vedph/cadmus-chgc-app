@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
   FormBuilder,
@@ -7,11 +7,13 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { ChgcImageAnnotation } from '../chgc-image-annotations';
+import { ChgcAnnotationPayload } from '../chgc-image-annotations';
 import { IdLookupService } from './id-lookup.service';
+import { ListAnnotation } from '@myrmidon/cadmus-img-annotator';
+import { AnnotationThesauriService } from './annotation-thesauri.service';
 
 /**
- * Editor for CHGC image annotations metadata.
+ * Editor for CHGC image annotations.
  */
 @Component({
   selector: 'cadmus-chgc-image-annotation',
@@ -19,17 +21,22 @@ import { IdLookupService } from './id-lookup.service';
   styleUrls: ['./chgc-image-annotation.component.css'],
   providers: [IdLookupService],
 })
-export class ChgcImageAnnotationComponent {
-  private _annotation: ChgcImageAnnotation | undefined;
+export class ChgcImageAnnotationComponent implements OnInit {
+  private _annotation: ListAnnotation<ChgcAnnotationPayload> | undefined;
 
   /**
    * The annotation to edit.
    */
   @Input()
-  public get annotation(): ChgcImageAnnotation | undefined | null {
+  public get annotation():
+    | ListAnnotation<ChgcAnnotationPayload>
+    | undefined
+    | null {
     return this._annotation;
   }
-  public set annotation(value: ChgcImageAnnotation | undefined | null) {
+  public set annotation(
+    value: ListAnnotation<ChgcAnnotationPayload> | undefined | null
+  ) {
     if (this._annotation === value) {
       return;
     }
@@ -37,15 +44,14 @@ export class ChgcImageAnnotationComponent {
     this.updateForm(this._annotation);
   }
 
+  @Output()
+  public cancel: EventEmitter<void>;
+
+  @Output()
+  public annotationChange: EventEmitter<ListAnnotation<ChgcAnnotationPayload>>;
+
   // chgc-ids
-  @Input()
   public idEntries: ThesaurusEntry[] | undefined;
-
-  @Output()
-  public editorClose: EventEmitter<void>;
-
-  @Output()
-  public annotationChange: EventEmitter<ChgcImageAnnotation>;
 
   public eid: FormControl<ThesaurusEntry | null>;
   public label: FormControl<string | null>;
@@ -53,6 +59,7 @@ export class ChgcImageAnnotationComponent {
   public form: FormGroup;
 
   constructor(
+    private _annThesService: AnnotationThesauriService,
     formBuilder: FormBuilder,
     public idLookupService: IdLookupService
   ) {
@@ -66,28 +73,43 @@ export class ChgcImageAnnotationComponent {
       note: this.note,
     });
     // events
-    this.annotationChange = new EventEmitter<ChgcImageAnnotation>();
-    this.editorClose = new EventEmitter<void>();
+    this.annotationChange = new EventEmitter<
+      ListAnnotation<ChgcAnnotationPayload>
+    >();
+    this.cancel = new EventEmitter<void>();
   }
 
-  private updateForm(annotation?: ChgcImageAnnotation): void {
-    if (!annotation) {
+  public ngOnInit(): void {
+    // get the thesaurus from service as this editor is instantiated
+    // by the dialog service
+    this._annThesService.getThesaurusEntries('chgc-ids').then((entries) => {
+      this.idEntries = entries;
+    });
+  }
+
+  private updateForm(annotation?: ListAnnotation<ChgcAnnotationPayload>): void {
+    if (!annotation?.payload) {
       this.form.reset();
       return;
     }
     // in CHGC id is always equal to value
-    this.eid.setValue({ id: annotation.eid, value: annotation.eid });
-    this.label.setValue(annotation.label || null);
-    this.note.setValue(annotation.note || null);
+    this.eid.setValue({
+      id: annotation.payload!.eid,
+      value: annotation.payload!.eid,
+    });
+    this.label.setValue(annotation.payload.label || null);
+    this.note.setValue(annotation.payload.note || null);
     this.form.markAsPristine();
   }
 
-  private getModel(): ChgcImageAnnotation {
+  private getModel(): ListAnnotation<ChgcAnnotationPayload> {
     return {
       ...this._annotation!,
-      eid: this.eid.value?.id || '',
-      label: this.label.value || undefined,
-      note: this.note.value || undefined,
+      payload: {
+        eid: this.eid.value?.id || '',
+        label: this.label.value || undefined,
+        note: this.note.value || undefined,
+      } as ChgcAnnotationPayload,
     };
   }
 
@@ -97,8 +119,8 @@ export class ChgcImageAnnotationComponent {
     this.eid.updateValueAndValidity();
   }
 
-  public cancel(): void {
-    this.editorClose.emit();
+  public close(): void {
+    this.cancel.emit();
   }
 
   public save(): void {

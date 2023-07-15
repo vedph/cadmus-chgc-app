@@ -18,18 +18,15 @@ import { AuthJwtService } from '@myrmidon/auth-jwt-login';
 import { EditedObject, ModelEditorComponentBase } from '@myrmidon/cadmus-ui';
 import { ThesauriSet, ThesaurusEntry } from '@myrmidon/cadmus-core';
 import {
-  GalleryImage,
   GalleryOptionsService,
   GalleryService,
   IMAGE_GALLERY_SERVICE_KEY,
 } from '@myrmidon/cadmus-img-gallery';
-import {
-  BarCustomAction,
-  BarCustomActionRequest,
-} from '@myrmidon/cadmus-ui-custom-action-bar';
+import { GalleryImage, ListAnnotation } from '@myrmidon/cadmus-img-annotator';
 
 import {
   CHGC_IMAGE_ANNOTATIONS_PART_TYPEID,
+  ChgcAnnotationPayload,
   ChgcImageAnnotation,
   ChgcImageAnnotationsPart,
 } from '../chgc-image-annotations';
@@ -55,10 +52,9 @@ export class ChgcImageAnnotationsPartComponent
   public idEntries: ThesaurusEntry[] | undefined;
 
   public image?: GalleryImage;
-  public annotations: FormControl<ChgcImageAnnotation[]>;
+  public annotations: FormControl<ListAnnotation<ChgcAnnotationPayload>[]>;
   public editedIndex: number;
   public editedAnnotation?: ChgcImageAnnotation;
-  public actions: BarCustomAction[];
 
   @ViewChild('editor', { static: false, read: ElementRef })
   public editorRef?: ElementRef;
@@ -79,14 +75,6 @@ export class ChgcImageAnnotationsPartComponent
       validators: NgToolsValidators.strictMinLengthValidator(1),
       nonNullable: true,
     });
-    // actions
-    this.actions = [
-      {
-        id: 'edit-meta',
-        tip: 'Edit metadata',
-        iconId: 'list_alt',
-      },
-    ];
   }
 
   public override ngOnInit(): void {
@@ -114,6 +102,62 @@ export class ChgcImageAnnotationsPartComponent
     }
   }
 
+  private chgcToListAnnotation(
+    source: ChgcImageAnnotation | null
+  ): ListAnnotation<ChgcAnnotationPayload> | null {
+    if (!source) {
+      return null;
+    }
+    return {
+      id: source.id,
+      image: source.target,
+      value: {
+        id: source.id,
+        '@context': 'http://www.w3.org/ns/anno.jsonld',
+        type: 'Annotation',
+        target: {
+          source: source.target.uri,
+          selector: {
+            type: source.selector.startsWith('<')
+              ? 'SvgSelector'
+              : 'FragmentSelector',
+            conformsTo: 'http://www.w3.org/TR/media-frags/',
+            value: source.selector,
+          },
+        },
+        // we need a body for Annotorious to work
+        body: [
+          {
+            type: 'TextualBody',
+            value: source.eid,
+            purpose: 'tagging',
+          },
+        ],
+      },
+      payload: {
+        eid: source.eid,
+        label: source.label,
+        note: source.note,
+      },
+    };
+  }
+
+  private listToChgcAnnotation(
+    source: ListAnnotation<ChgcAnnotationPayload> | null
+  ): ChgcImageAnnotation | null {
+    if (!source) {
+      return null;
+    }
+    return {
+      id: source.id,
+      target: source.image,
+      selector: source.value.target.selector.value,
+      eid: source.payload?.eid || '',
+      label: source.payload?.label || '',
+      note: source.payload?.note || '',
+    };
+  }
+
   private updateForm(part?: ChgcImageAnnotationsPart | null): void {
     if (!part) {
       this.form.reset();
@@ -122,8 +166,13 @@ export class ChgcImageAnnotationsPartComponent
     this.image = part.annotations?.length
       ? part.annotations[0].target
       : undefined;
-    this.annotations.setValue(part.annotations || []);
-    this.form.markAsPristine();
+
+    setTimeout(() => {
+      this.annotations.setValue(
+        part.annotations.map((a) => this.chgcToListAnnotation(a)!) || []
+      );
+      this.form.markAsPristine();
+    });
   }
 
   protected override onDataSet(
@@ -142,7 +191,8 @@ export class ChgcImageAnnotationsPartComponent
     let part = this.getEditedPart(
       CHGC_IMAGE_ANNOTATIONS_PART_TYPEID
     ) as ChgcImageAnnotationsPart;
-    part.annotations = this.annotations.value || [];
+    part.annotations =
+      this.annotations.value.map((a) => this.listToChgcAnnotation(a)!) || [];
     return part;
   }
 
@@ -159,55 +209,11 @@ export class ChgcImageAnnotationsPartComponent
     this.tabIndex = 0;
   }
 
-  public onAnnotationsChange(annotations: ChgcImageAnnotation[]): void {
+  public onAnnotationsChange(
+    annotations: ListAnnotation<ChgcAnnotationPayload>[]
+  ): void {
     this.annotations.setValue(annotations);
     this.annotations.updateValueAndValidity();
     this.annotations.markAsDirty();
-  }
-
-  private scrollTo(element: HTMLElement) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-      inline: 'start',
-    });
-  }
-
-  public editAnnotation(annotation: ChgcImageAnnotation, index: number): void {
-    this.editedAnnotation = annotation;
-    this.editedIndex = index;
-    setTimeout(() => {
-      if (this.editorRef?.nativeElement) {
-        console.log('Setting focus to editorRef.nativeElement');
-        this.scrollTo(this.editorRef.nativeElement);
-        this.editorRef.nativeElement.focus();
-      } else {
-        console.warn('No editorRef element');
-      }
-    }, 0);
-  }
-
-  public closeAnnotation(): void {
-    this.editedAnnotation = undefined;
-    this.editedIndex = -1;
-  }
-
-  public saveAnnotation(annotation: ChgcImageAnnotation): void {
-    if (this.editedIndex === -1) {
-      return;
-    }
-    const annotations = [...this.annotations.value];
-    annotations[this.editedIndex] = annotation;
-    this.annotations.setValue(annotations);
-    this.annotations.updateValueAndValidity();
-    this.annotations.markAsDirty();
-    this.closeAnnotation();
-  }
-
-  public onActionRequest(action: BarCustomActionRequest): void {
-    if (action.id === 'edit-meta') {
-      const i = +action.payload;
-      this.editAnnotation(this.annotations.value[i], i);
-    }
   }
 }

@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,12 +30,18 @@ import { NgToolsModule } from '@myrmidon/ng-tools';
 import { ChgcImageAnnotationsPartComponent } from './chgc-image-annotations-part/chgc-image-annotations-part.component';
 import { ChgcImageAnnotationComponent } from './chgc-image-annotation/chgc-image-annotation.component';
 import { ChgcImageAnnotationsPartFeatureComponent } from './chgc-image-annotations-part-feature/chgc-image-annotations-part-feature.component';
+import { ChgcImageAnnotationDialogComponent } from './chgc-image-annotation-dialog/chgc-image-annotation-dialog.component';
+import { ChgcImgAnnotationListComponent } from './chgc-img-annotation-list/chgc-img-annotation-list.component';
+import { ChgcGalleryImgAnnotatorComponent } from './chgc-gallery-img-annotator/chgc-gallery-img-annotator.component';
 
 @NgModule({
   declarations: [
     ChgcImageAnnotationsPartComponent,
     ChgcImageAnnotationComponent,
     ChgcImageAnnotationsPartFeatureComponent,
+    ChgcImageAnnotationDialogComponent,
+    ChgcImgAnnotationListComponent,
+    ChgcGalleryImgAnnotatorComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +51,7 @@ import { ChgcImageAnnotationsPartFeatureComponent } from './chgc-image-annotatio
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
@@ -69,6 +77,9 @@ import { ChgcImageAnnotationsPartFeatureComponent } from './chgc-image-annotatio
     ChgcImageAnnotationsPartComponent,
     ChgcImageAnnotationComponent,
     ChgcImageAnnotationsPartFeatureComponent,
+    ChgcImageAnnotationDialogComponent,
+    ChgcImgAnnotationListComponent,
+    ChgcGalleryImgAnnotatorComponent,
   ],
 })
 export class CadmusPartChgcImageAnnotationsModule {}

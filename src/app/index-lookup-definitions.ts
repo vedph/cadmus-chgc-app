@@ -1,6 +1,6 @@
 import { IndexLookupDefinitions } from '@myrmidon/cadmus-core';
+import { CHGC_IMAGE_ANNOTATIONS_PART_TYPEID } from '@myrmidon/cadmus-part-chgc-image-annotations';
 import { METADATA_PART_TYPEID } from '@myrmidon/cadmus-part-general-ui';
-import { GALLERY_IMAGE_ANNOTATIONS_PART_TYPEID } from '@myrmidon/cadmus-part-img-gallery-image-annotations';
 
 export const INDEX_LOOKUP_DEFINITIONS: IndexLookupDefinitions = {
   // human-friendly ID for items
@@ -10,7 +10,7 @@ export const INDEX_LOOKUP_DEFINITIONS: IndexLookupDefinitions = {
   },
   // gallery
   img_anno_eid: {
-    typeId: GALLERY_IMAGE_ANNOTATIONS_PART_TYPEID,
+    typeId: CHGC_IMAGE_ANNOTATIONS_PART_TYPEID,
     name: 'eid',
   },
 };
