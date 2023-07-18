@@ -5,9 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ImportService } from '../import.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs';
+
+import { ImportService } from '../import.service';
 
 @Component({
   selector: 'app-import-group',
@@ -19,6 +20,7 @@ export class ImportGroupComponent {
   public form: FormGroup;
   public busy?: boolean;
   public xml: FormControl<string | null>;
+  public shortener: FormControl<string | null>;
   public addedCount: number;
 
   public editorOptions = {
@@ -38,10 +40,15 @@ export class ImportGroupComponent {
       Validators.required,
       Validators.maxLength(100),
     ]);
-    this.xml = formBuilder.control(null, Validators.maxLength(50000));
+    this.xml = formBuilder.control(null, [
+      Validators.required,
+      Validators.maxLength(50000),
+    ]);
+    this.shortener = new FormControl(null, Validators.maxLength(1000));
     this.form = formBuilder.group({
       groupId: this.groupId,
       xml: this.xml,
+      shortener: this.shortener,
     });
     this.addedCount = 0;
   }
@@ -52,7 +59,11 @@ export class ImportGroupComponent {
     }
     this.busy = true;
     this._service
-      .importGroup(this.groupId.value!, this.xml.value)
+      .importGroup(
+        this.groupId.value!,
+        this.xml.value,
+        this.shortener.value || undefined
+      )
       .pipe(take(1))
       .subscribe({
         next: (result) => {

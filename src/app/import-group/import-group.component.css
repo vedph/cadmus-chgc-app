@@ -7,7 +7,10 @@ fieldset {
 legend {
   color: silver;
 }
-/* row of elements */
+.long-text {
+  width: 100%;
+  max-width: 600px;
+}
 .form-row {
   display: flex;
   gap: 8px;
