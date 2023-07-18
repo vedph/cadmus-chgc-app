@@ -1,4 +1,5 @@
 import { Part } from '@myrmidon/cadmus-core';
+import { GalleryImage } from '@myrmidon/cadmus-img-annotator';
 import { GalleryImageAnnotation } from '@myrmidon/cadmus-img-gallery';
 
 /**
@@ -26,6 +27,7 @@ export interface ChgcImageAnnotation extends GalleryImageAnnotation {
  * The gallery image annotations part model.
  */
 export interface ChgcImageAnnotationsPart extends Part {
+  image?: GalleryImage;
   annotations: ChgcImageAnnotation[];
 }
 
@@ -87,6 +89,24 @@ export const CHGC_IMAGE_ANNOTATIONS_PART_SCHEMA = {
     roleId: {
       type: ['string', 'null'],
       pattern: '^([a-z][-0-9a-z._]*)?$',
+    },
+    image: {
+      type: 'object',
+      required: ['id', 'uri', 'title'],
+      properties: {
+        id: {
+          type: 'string',
+        },
+        uri: {
+          type: 'string',
+        },
+        title: {
+          type: 'string',
+        },
+        description: {
+          type: 'string',
+        },
+      },
     },
     annotations: {
       type: 'array',

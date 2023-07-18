@@ -17,6 +17,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { LoginPageComponent } from './login-page/login-page.component';
 import { GalleryOptionsComponent } from './gallery-options/gallery-options.component';
 import { ExportGroupComponent } from './export-group/export-group.component';
+import { ImportGroupComponent } from './import-group/import-group.component';
 
 const routes: Routes = [
   // local home
@@ -55,6 +56,12 @@ const routes: Routes = [
   {
     path: 'export',
     component: ExportGroupComponent,
+    canActivate: [AuthJwtGuardService],
+  },
+  // import
+  {
+    path: 'import',
+    component: ImportGroupComponent,
     canActivate: [AuthJwtGuardService],
   },
   // cadmus - items

@@ -163,9 +163,7 @@ export class ChgcImageAnnotationsPartComponent
       this.form.reset();
       return;
     }
-    this.image = part.annotations?.length
-      ? part.annotations[0].target
-      : undefined;
+    this.image = part.image;
 
     setTimeout(() => {
       this.annotations.setValue(
@@ -191,6 +189,7 @@ export class ChgcImageAnnotationsPartComponent
     let part = this.getEditedPart(
       CHGC_IMAGE_ANNOTATIONS_PART_TYPEID
     ) as ChgcImageAnnotationsPart;
+    part.image = this.image;
     part.annotations =
       this.annotations.value.map((a) => this.listToChgcAnnotation(a)!) || [];
     return part;

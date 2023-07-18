@@ -46,6 +46,9 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+- 2023-07-18:
+  - added `image` to CHGC image annotations part.
+
 ### 2.0.0
 
 - 2023-07-15: **breaking changes**: refactored image annotation using new headless infrastructure.
