@@ -10,7 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 1. `npm run build-lib`;
 2. update version in `env.js` and then `ng build`;
-3. `docker build . -t vedph2020/cadmus-chgc-app:2.0.0 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
+3. `docker build . -t vedph2020/cadmus-chgc-app:2.0.1 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
 
 ## IIIF
 
@@ -46,8 +46,11 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+### 2.0.1
+
 - 2023-07-18:
   - added `image` to CHGC image annotations part.
+  - added importer.
 
 ### 2.0.0
 
