@@ -195,17 +195,11 @@ export class ChgcImageAnnotationsPartComponent
     return part;
   }
 
-  public onImagePick(image: GalleryImage): void {
-    // get the single image as we need the "full" size
-    // const options = { ...this._options, width: 600, height: 800 };
-
-    this._galleryService
-      .getImage(image.id, this._options.get())
-      .pipe(take(1))
-      .subscribe((image) => {
-        this.image = image!;
-      });
-    this.tabIndex = 0;
+  public onImageChange(image?: GalleryImage): void {
+    this.image = image;
+    if (this.image) {
+      this.tabIndex = 0;
+    }
   }
 
   public onAnnotationsChange(

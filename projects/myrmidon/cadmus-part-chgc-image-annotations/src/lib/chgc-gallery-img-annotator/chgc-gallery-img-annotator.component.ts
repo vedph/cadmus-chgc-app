@@ -68,6 +68,7 @@ export class ChgcGalleryImgAnnotatorComponent implements OnInit, OnDestroy {
     }
     this._image = value || undefined;
     this.loading = true;
+    this.imageChange.emit(this._image);
   }
 
   /**
@@ -86,6 +87,12 @@ export class ChgcGalleryImgAnnotatorComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Emitted when image changes.
+   */
+  @Output()
+  public imageChange: EventEmitter<GalleryImage | undefined>;
+
+  /**
    * Emitted whenever annotations change.
    */
   @Output()
@@ -101,6 +108,7 @@ export class ChgcGalleryImgAnnotatorComponent implements OnInit, OnDestroy {
     private _options: GalleryOptionsService,
     private changeDetector: ChangeDetectorRef
   ) {
+    this.imageChange = new EventEmitter<GalleryImage | undefined>();
     this.annotationsChange = new EventEmitter<
       ListAnnotation<ChgcAnnotationPayload>[]
     >();
