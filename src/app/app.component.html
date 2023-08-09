@@ -52,7 +52,13 @@
         "
         >Thesauri</a
       >
-      <a mat-menu-item routerLink="/import">Import TEI</a>
+      <a
+        mat-menu-item
+        routerLink="/import/thesauri"
+        *ngIf="user && user.roles.includes('admin')"
+        >Import thesauri</a
+      >
+      <a mat-menu-item routerLink="/import/group">Import TEI</a>
       <a mat-menu-item routerLink="/export">Export TEI</a>
       <a mat-menu-item routerLink="/options">Options</a>
     </mat-menu>

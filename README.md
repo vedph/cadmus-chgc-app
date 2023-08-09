@@ -46,6 +46,8 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+- 2023-08-09: added import thesauri page.
+
 ### 2.0.2
 
 - 2023-07-28: fixed image not updated on annotations part.

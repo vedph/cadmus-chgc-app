@@ -99,6 +99,7 @@ import {
 import { GalleryOptionsComponent } from './gallery-options/gallery-options.component';
 import { ExportGroupComponent } from './export-group/export-group.component';
 import { ImportGroupComponent } from './import-group/import-group.component';
+import { ImportThesauriComponent } from './import-thesauri/import-thesauri.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { ImportGroupComponent } from './import-group/import-group.component';
     GalleryOptionsComponent,
     ExportGroupComponent,
     ImportGroupComponent,
+    ImportThesauriComponent,
   ],
   imports: [
     BrowserAnimationsModule,
