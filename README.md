@@ -46,6 +46,8 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+- 2023-09-01: updated Angular.
+
 ### 2.0.3
 
 - 2023-08-09: added import thesauri page.
