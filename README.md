@@ -46,6 +46,8 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+- 2023-09-22: repositioned bug button.
+
 ### 2.0.5
 
 - 2023-09-22:
