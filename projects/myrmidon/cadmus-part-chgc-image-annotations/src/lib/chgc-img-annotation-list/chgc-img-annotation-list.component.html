@@ -42,6 +42,14 @@
         </td>
         <td>{{ a | objectToString : annotationToString }}</td>
         <td class="muted noif-lt-md">{{ a.id }}</td>
+        <!-- TODO remove bug button -->
+        <td>
+          <button type="button" mat-icon-button (click)="dumpAnnotation(a)">
+            <mat-icon [style.color]="a.value.target ? 'inherit' : 'red'"
+              >bug_report</mat-icon
+            >
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -75,6 +75,7 @@ import { CadmusUiPgModule } from '@myrmidon/cadmus-ui-pg';
 import { CadmusItemEditorModule } from '@myrmidon/cadmus-item-editor';
 import { CadmusItemListModule } from '@myrmidon/cadmus-item-list';
 import { CadmusItemSearchModule } from '@myrmidon/cadmus-item-search';
+import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
 import { CadmusThesaurusEditorModule } from '@myrmidon/cadmus-thesaurus-editor';
 import { CadmusThesaurusListModule } from '@myrmidon/cadmus-thesaurus-list';
 import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
@@ -185,6 +186,7 @@ import { ImportThesauriComponent } from './import-thesauri/import-thesauri.compo
     CadmusThesaurusEditorModule,
     CadmusThesaurusListModule,
     CadmusThesaurusUiModule,
+    CadmusRefsLookupModule,
     CadmusUiFlagsPickerModule,
   ],
   providers: [

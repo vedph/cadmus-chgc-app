@@ -11,7 +11,6 @@ import {
   FormGroup,
   UntypedFormGroup,
 } from '@angular/forms';
-import { take } from 'rxjs';
 
 import { NgToolsValidators } from '@myrmidon/ng-tools';
 import { AuthJwtService } from '@myrmidon/auth-jwt-login';
@@ -62,9 +61,9 @@ export class ChgcImageAnnotationsPartComponent
   constructor(
     authService: AuthJwtService,
     formBuilder: FormBuilder,
-    @Inject(IMAGE_GALLERY_SERVICE_KEY)
-    private _galleryService: GalleryService,
-    private _options: GalleryOptionsService
+    // @Inject(IMAGE_GALLERY_SERVICE_KEY)
+    // private _galleryService: GalleryService,
+    // private _options: GalleryOptionsService
   ) {
     super(authService, formBuilder);
     this.tabIndex = 0;
@@ -150,7 +149,8 @@ export class ChgcImageAnnotationsPartComponent
     }
     return {
       id: source.id,
-      target: source.image,
+      // defensive: should source.image not yet be set, use the current image
+      target: source.image || this.image!,
       selector: source.value.target.selector.value,
       eid: source.payload?.eid || '',
       label: source.payload?.label || '',

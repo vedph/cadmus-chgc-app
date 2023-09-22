@@ -9,6 +9,7 @@ import {
 import { ExportService } from '../export.service';
 import { take } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GroupRefLookupService } from '../services/group-ref-lookup.service';
 
 @Component({
   selector: 'app-export-group',
@@ -32,7 +33,8 @@ export class ExportGroupComponent {
   constructor(
     formBuilder: FormBuilder,
     private _service: ExportService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    public lookupService: GroupRefLookupService
   ) {
     this.groupId = new FormControl(null, [
       Validators.required,
@@ -43,6 +45,12 @@ export class ExportGroupComponent {
       groupId: this.groupId,
       xml: this.xml,
     });
+  }
+
+  public onGroupChange(groupId: string): void {
+    this.groupId.setValue(groupId);
+    this.groupId.updateValueAndValidity();
+    this.groupId.markAsDirty();
   }
 
   public export(): void {

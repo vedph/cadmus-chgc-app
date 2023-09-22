@@ -25,7 +25,7 @@
     "@auth0/angular-jwt": "^5.1.2",
     "@myrmidon/auth-jwt-admin": "^2.0.0",
     "@myrmidon/auth-jwt-login": "^2.0.0",
-    "@myrmidon/cadmus-api": "^5.0.2",
+    "@myrmidon/cadmus-api": "^5.0.3",
     "@myrmidon/cadmus-core": "^5.0.0",
     "@myrmidon/cadmus-graph-pg": "^5.0.0",
     "@myrmidon/cadmus-graph-ui": "^5.0.3",
