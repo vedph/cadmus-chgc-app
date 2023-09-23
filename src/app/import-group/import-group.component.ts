@@ -72,9 +72,6 @@ export class ImportGroupComponent {
             this._snackbar.open(result.error, 'OK');
           } else {
             this.addedCount = result.count;
-            this._snackbar.open('Imported pages: ' + result.count, 'OK', {
-              duration: 3000,
-            });
           }
         },
         error: (error) => {
