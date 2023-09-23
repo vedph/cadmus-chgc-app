@@ -10,7 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 1. `npm run build-lib`;
 2. update version in `env.js` and then `ng build`;
-3. `docker build . -t vedph2020/cadmus-chgc-app:2.0.5 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
+3. `docker build . -t vedph2020/cadmus-chgc-app:2.0.6 -t vedph2020/cadmus-chgc-app:latest` (replace with the current version).
 
 ## IIIF
 
@@ -45,6 +45,8 @@ Quick reference for [IIIF pattern](https://iiif.io/api/image/3.0/#image-request-
 Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD0000263308/manifest.json>.
 
 ## History
+
+### 2.0.6
 
 - 2023-09-22: repositioned bug button.
 
