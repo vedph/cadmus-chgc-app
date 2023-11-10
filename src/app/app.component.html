@@ -58,6 +58,15 @@
         *ngIf="user && user.roles.includes('admin')"
         >Import thesauri</a
       >
+      <a
+        mat-menu-item
+        routerLink="/flags"
+        *ngIf="
+          user &&
+          (user.roles.includes('admin') || user.roles.includes('editor'))
+        "
+        >Flags
+      </a>
       <a mat-menu-item routerLink="/import/group">Import pages</a>
       <a mat-menu-item routerLink="/export">Export TEI</a>
       <a mat-menu-item routerLink="/options">Options</a>
@@ -103,13 +112,16 @@
       >
 
       <!-- user menu -->
-      <button mat-button [matMenuTriggerFor]="userMenu">User</button>
+      <button type="button" mat-button [matMenuTriggerFor]="userMenu">
+        User
+      </button>
       <mat-menu #userMenu>
         <a mat-menu-item routerLink="/reset-password">Reset password</a>
       </mat-menu>
 
       <!-- admin menu -->
       <button
+        type="button"
         *ngIf="user && user.roles.includes('admin')"
         mat-button
         [matMenuTriggerFor]="adminMenu"
