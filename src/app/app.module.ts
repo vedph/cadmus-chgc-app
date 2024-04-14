@@ -15,7 +15,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -52,18 +55,25 @@ import {
 import { AuthJwtAdminModule } from '@myrmidon/auth-jwt-admin';
 
 // cadmus bricks
-import { CadmusRefsDocReferencesModule } from '@myrmidon/cadmus-refs-doc-references';
-import { CadmusRefsHistoricalDateModule } from '@myrmidon/cadmus-refs-historical-date';
-import { CadmusRefsAssertedIdsModule } from '@myrmidon/cadmus-refs-asserted-ids';
+import { DocReferencesComponent } from '@myrmidon/cadmus-refs-doc-references';
+import { HistoricalDateComponent } from '@myrmidon/cadmus-refs-historical-date';
+import {
+  AssertedCompositeIdComponent,
+  AssertedCompositeIdsComponent,
+} from '@myrmidon/cadmus-refs-asserted-ids';
 
 // cadmus
 import { CadmusApiModule } from '@myrmidon/cadmus-api';
 import { CadmusCoreModule } from '@myrmidon/cadmus-core';
 import { CadmusGraphPgModule } from '@myrmidon/cadmus-graph-pg';
 import { CadmusGraphUiModule } from '@myrmidon/cadmus-graph-ui';
-import { CadmusImgAnnotatorModule } from '@myrmidon/cadmus-img-annotator';
 import {
-  CadmusImgGalleryModule,
+  ImgAnnotatorDirective,
+  ImgAnnotatorToolbarComponent,
+} from '@myrmidon/cadmus-img-annotator';
+import {
+  GalleryFilterComponent,
+  GalleryListComponent,
   IMAGE_GALLERY_OPTIONS_KEY,
   IMAGE_GALLERY_SERVICE_KEY,
 } from '@myrmidon/cadmus-img-gallery';
@@ -74,11 +84,11 @@ import { CadmusUiPgModule } from '@myrmidon/cadmus-ui-pg';
 import { CadmusItemEditorModule } from '@myrmidon/cadmus-item-editor';
 import { CadmusItemListModule } from '@myrmidon/cadmus-item-list';
 import { CadmusItemSearchModule } from '@myrmidon/cadmus-item-search';
-import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
+import { RefLookupComponent } from '@myrmidon/cadmus-refs-lookup';
 import { CadmusThesaurusEditorModule } from '@myrmidon/cadmus-thesaurus-editor';
 import { CadmusThesaurusListModule } from '@myrmidon/cadmus-thesaurus-list';
 import { CadmusThesaurusUiModule } from '@myrmidon/cadmus-thesaurus-ui';
-import { CadmusUiFlagsPickerModule } from '@myrmidon/cadmus-ui-flags-picker';
+import { FlagsPickerComponent } from '@myrmidon/cadmus-ui-flags-picker';
 
 // local components
 import { AppRoutingModule } from './app-routing.module';
@@ -92,7 +102,6 @@ import { PART_EDITOR_KEYS } from './part-editor-keys';
 import { INDEX_LOOKUP_DEFINITIONS } from './index-lookup-definitions';
 import { ITEM_BROWSER_KEYS } from './item-browser-keys';
 import {
-  CadmusImgGalleryIiifModule,
   SimpleIiifGalleryOptions,
   SimpleIiifGalleryService,
 } from '@myrmidon/cadmus-img-gallery-iiif';
@@ -164,15 +173,19 @@ import { ImportThesauriComponent } from './import-thesauri/import-thesauri.compo
     AuthJwtLoginModule,
     AuthJwtAdminModule,
     // cadmus bricks
-    CadmusImgGalleryIiifModule,
-    CadmusRefsDocReferencesModule,
-    CadmusRefsHistoricalDateModule,
-    CadmusRefsAssertedIdsModule,
+    DocReferencesComponent,
+    HistoricalDateComponent,
+    AssertedCompositeIdComponent,
+    AssertedCompositeIdsComponent,
     // cadmus
     CadmusApiModule,
     CadmusCoreModule,
-    CadmusImgAnnotatorModule,
-    CadmusImgGalleryModule,
+    ImgAnnotatorDirective,
+    ImgAnnotatorToolbarComponent,
+    GalleryListComponent,
+    GalleryFilterComponent,
+    RefLookupComponent,
+    FlagsPickerComponent,
     CadmusProfileCoreModule,
     CadmusStateModule,
     CadmusUiModule,
@@ -185,8 +198,6 @@ import { ImportThesauriComponent } from './import-thesauri/import-thesauri.compo
     CadmusThesaurusEditorModule,
     CadmusThesaurusListModule,
     CadmusThesaurusUiModule,
-    CadmusRefsLookupModule,
-    CadmusUiFlagsPickerModule,
   ],
   providers: [
     // dialog default

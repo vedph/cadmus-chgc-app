@@ -16,24 +16,6 @@
             (itemChange)="onGroupChange($event)"
           ></cadmus-ref-lookup>
 
-          <!-- <mat-form-field>
-            <mat-label>group ID</mat-label>
-            <input matInput [formControl]="groupId" />
-            <mat-error
-              *ngIf="
-                $any(groupId).errors?.required &&
-                (groupId.dirty || groupId.touched)
-              "
-              >group ID required</mat-error
-            >
-            <mat-error
-              *ngIf="
-                $any(groupId).errors?.maxLength &&
-                (groupId.dirty || groupId.touched)
-              "
-              >group ID too long</mat-error
-            >
-          </mat-form-field> -->
           <button
             type="submit"
             mat-flat-button
@@ -54,10 +36,10 @@
       </form>
     </fieldset>
     <div id="xml">
-      <ngx-monaco-editor
-        [options]="editorOptions"
-        [formControl]="xml"
-      ></ngx-monaco-editor>
+      <nge-monaco-editor
+        style="--editor-height: 600px"
+        (ready)="onCreateEditor($event)"
+      />
     </div>
   </mat-card-content>
 </mat-card>

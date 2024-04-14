@@ -46,6 +46,7 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+- 2024-04-14: ⚠️ upgraded to [bricks V2](https://github.com/vedph/cadmus-bricks-shell-v2).
 - 2023-11-10: ⚠️ upgraded to Angular 17.
 
 ### 2.0.7

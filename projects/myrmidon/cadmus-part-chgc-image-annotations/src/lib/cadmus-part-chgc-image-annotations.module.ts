@@ -17,11 +17,21 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { CadmusCoreModule } from '@myrmidon/cadmus-core';
-import { CadmusImgAnnotatorModule } from '@myrmidon/cadmus-img-annotator';
-import { CadmusImgGalleryModule } from '@myrmidon/cadmus-img-gallery';
-import { CadmusRefsAssertedIdsModule } from '@myrmidon/cadmus-refs-asserted-ids';
-import { CadmusRefsLookupModule } from '@myrmidon/cadmus-refs-lookup';
-import { CadmusRefsDocReferencesModule } from '@myrmidon/cadmus-refs-doc-references';
+import {
+  ImgAnnotatorDirective,
+  ImgAnnotatorToolbarComponent,
+  ObjectToStringPipe,
+} from '@myrmidon/cadmus-img-annotator';
+import {
+  GalleryFilterComponent,
+  GalleryListComponent,
+} from '@myrmidon/cadmus-img-gallery';
+import {
+  AssertedCompositeIdComponent,
+  AssertedCompositeIdsComponent,
+} from '@myrmidon/cadmus-refs-asserted-ids';
+import { RefLookupComponent } from '@myrmidon/cadmus-refs-lookup';
+import { DocReferencesComponent } from '@myrmidon/cadmus-refs-doc-references';
 import { CadmusUiModule } from '@myrmidon/cadmus-ui';
 import { CadmusUiPgModule } from '@myrmidon/cadmus-ui-pg';
 import { NgMatToolsModule } from '@myrmidon/ng-mat-tools';
@@ -67,11 +77,15 @@ import { ChgcGalleryImgAnnotatorComponent } from './chgc-gallery-img-annotator/c
     CadmusCoreModule,
     CadmusUiModule,
     CadmusUiPgModule,
-    CadmusImgAnnotatorModule,
-    CadmusImgGalleryModule,
-    CadmusRefsAssertedIdsModule,
-    CadmusRefsDocReferencesModule,
-    CadmusRefsLookupModule
+    ImgAnnotatorDirective,
+    ImgAnnotatorToolbarComponent,
+    ObjectToStringPipe,
+    GalleryFilterComponent,
+    GalleryListComponent,
+    AssertedCompositeIdComponent,
+    AssertedCompositeIdsComponent,
+    DocReferencesComponent,
+    RefLookupComponent,
   ],
   exports: [
     ChgcImageAnnotationsPartComponent,

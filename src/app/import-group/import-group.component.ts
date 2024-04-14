@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -15,21 +15,17 @@ import { ImportService } from '../import.service';
   templateUrl: './import-group.component.html',
   styleUrls: ['./import-group.component.css'],
 })
-export class ImportGroupComponent {
+export class ImportGroupComponent implements OnDestroy {
+  private readonly _disposables: monaco.IDisposable[] = [];
+  private _model?: monaco.editor.ITextModel;
+  private _editorModel?: monaco.editor.IStandaloneCodeEditor;
+
   public groupId: FormControl<string | null>;
   public form: FormGroup;
   public busy?: boolean;
   public xml: FormControl<string | null>;
   public shortener: FormControl<string | null>;
   public addedCount: number;
-
-  public editorOptions = {
-    theme: 'vs-light',
-    language: 'xml',
-    wordWrap: 'on',
-    // https://github.com/atularen/ngx-monaco-editor/issues/19
-    automaticLayout: true,
-  };
 
   constructor(
     formBuilder: FormBuilder,
@@ -51,6 +47,32 @@ export class ImportGroupComponent {
       shortener: this.shortener,
     });
     this.addedCount = 0;
+  }
+
+  public onCreateEditor(editor: monaco.editor.IEditor) {
+    editor.updateOptions({
+      minimap: {
+        side: 'right',
+      },
+      wordWrap: 'on',
+      automaticLayout: true,
+    });
+    this._model =
+      this._model || monaco.editor.createModel('', 'xml');
+    editor.setModel(this._model);
+    this._editorModel = editor as monaco.editor.IStandaloneCodeEditor;
+
+    this._disposables.push(
+      this._model.onDidChangeContent((e) => {
+        this.xml.setValue(this._editorModel!.getValue());
+        this.xml.markAsDirty();
+        this.xml.updateValueAndValidity();
+      })
+    );
+  }
+
+  public ngOnDestroy() {
+    this._disposables.forEach((d) => d.dispose());
   }
 
   public import(): void {

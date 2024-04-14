@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -16,19 +16,15 @@ import { GroupRefLookupService } from '../services/group-ref-lookup.service';
   templateUrl: './export-group.component.html',
   styleUrls: ['./export-group.component.css'],
 })
-export class ExportGroupComponent {
+export class ExportGroupComponent implements OnDestroy {
+  private readonly _disposables: monaco.IDisposable[] = [];
+  private _model?: monaco.editor.ITextModel;
+  private _editorModel?: monaco.editor.IStandaloneCodeEditor;
+
   public groupId: FormControl<string | null>;
   public form: FormGroup;
   public busy?: boolean;
   public xml: FormControl<string | null>;
-
-  public editorOptions = {
-    theme: 'vs-light',
-    language: 'xml',
-    wordWrap: 'on',
-    // https://github.com/atularen/ngx-monaco-editor/issues/19
-    automaticLayout: true,
-  };
 
   constructor(
     formBuilder: FormBuilder,
@@ -45,6 +41,32 @@ export class ExportGroupComponent {
       groupId: this.groupId,
       xml: this.xml,
     });
+  }
+
+  public onCreateEditor(editor: monaco.editor.IEditor) {
+    editor.updateOptions({
+      minimap: {
+        side: 'right',
+      },
+      wordWrap: 'on',
+      automaticLayout: true,
+    });
+    this._model =
+    this._model || monaco.editor.createModel('', 'xml');
+    editor.setModel(this._model);
+    this._editorModel = editor as monaco.editor.IStandaloneCodeEditor;
+
+    this._disposables.push(
+      this._model.onDidChangeContent((e) => {
+        this.xml.setValue(this._editorModel!.getValue());
+        this.xml.markAsDirty();
+        this.xml.updateValueAndValidity();
+      })
+    );
+  }
+
+  public ngOnDestroy() {
+    this._disposables.forEach((d) => d.dispose());
   }
 
   public onGroupChange(groupId: string): void {
@@ -68,6 +90,7 @@ export class ExportGroupComponent {
             this._snackbar.open(result.error, 'OK');
           } else {
             this.xml.setValue(result.xml || '');
+            this._editorModel!.setValue(result.xml || '');
           }
         },
         error: (error) => {

@@ -56,10 +56,10 @@
 
         <!-- text -->
         <div id="xml">
-          <ngx-monaco-editor
-            [options]="editorOptions"
-            [formControl]="xml"
-          ></ngx-monaco-editor>
+          <nge-monaco-editor
+            style="--editor-height: 600px"
+            (ready)="onCreateEditor($event)"
+          />
         </div>
       </form>
     </fieldset>
