@@ -38,10 +38,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
-// ngx-monaco
-import { MonacoEditorModule } from 'ngx-monaco-editor';
-// ngx-markdown
-import { MarkdownModule } from 'ngx-markdown';
+// vendors
+import { NgeMonacoModule } from '@cisstech/nge/monaco';
+import { NgeMarkdownModule } from '@cisstech/nge/markdown';
 
 // myrmidon
 import { EnvServiceProvider, NgToolsModule } from '@myrmidon/ng-tools';
@@ -157,8 +156,8 @@ import { ImportThesauriComponent } from './import-thesauri/import-thesauri.compo
     MatToolbarModule,
     MatTreeModule,
     // vendors
-    MonacoEditorModule.forRoot(),
-    MarkdownModule.forRoot(),
+    NgeMonacoModule.forRoot({}),
+    NgeMarkdownModule,
     // myrmidon
     NgToolsModule,
     NgMatToolsModule,
