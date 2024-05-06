@@ -109,6 +109,16 @@ import { GalleryOptionsComponent } from './gallery-options/gallery-options.compo
 import { ExportGroupComponent } from './export-group/export-group.component';
 import { ImportGroupComponent } from './import-group/import-group.component';
 import { ImportThesauriComponent } from './import-thesauri/import-thesauri.component';
+import {
+  MdBoldCtePlugin,
+  MdEmojiCtePlugin,
+  MdItalicCtePlugin,
+  MdLinkCtePlugin,
+} from '@myrmidon/cadmus-text-ed-md';
+import {
+  CADMUS_TEXT_ED_BINDINGS_TOKEN,
+  CADMUS_TEXT_ED_SERVICE_OPTIONS_TOKEN,
+} from '@myrmidon/cadmus-text-ed';
 
 @NgModule({
   declarations: [
@@ -271,6 +281,51 @@ import { ImportThesauriComponent } from './import-thesauri/import-thesauri.compo
         pageSize: 6,
         // skip: 6
       } as SimpleIiifGalleryOptions,
+    },
+    // text editor
+    // provide each single plugin
+    MdBoldCtePlugin,
+    MdItalicCtePlugin,
+    MdEmojiCtePlugin,
+    MdLinkCtePlugin,
+    // provide a factory so that plugins can be instantiated via DI
+    {
+      provide: CADMUS_TEXT_ED_SERVICE_OPTIONS_TOKEN,
+      useFactory: (
+        mdBoldCtePlugin: MdBoldCtePlugin,
+        mdItalicCtePlugin: MdItalicCtePlugin,
+        mdEmojiCtePlugin: MdEmojiCtePlugin,
+        mdLinkCtePlugin: MdLinkCtePlugin
+      ) => {
+        return {
+          plugins: [
+            mdBoldCtePlugin,
+            mdItalicCtePlugin,
+            mdEmojiCtePlugin,
+            mdLinkCtePlugin,
+          ],
+        };
+      },
+      deps: [
+        MdBoldCtePlugin,
+        MdItalicCtePlugin,
+        MdEmojiCtePlugin,
+        MdLinkCtePlugin,
+      ],
+    },
+    // monaco bindings for plugins
+    // 2080 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB;
+    // 2087 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyI;
+    // 2083 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyE;
+    // 2090 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyL;
+    {
+      provide: CADMUS_TEXT_ED_BINDINGS_TOKEN,
+      useValue: {
+        2080: 'md.bold', // Ctrl+B
+        2087: 'md.italic', // Ctrl+I
+        2083: 'md.emoji', // Ctrl+E
+        2090: 'md.link', // Ctrl+L
+      },
     },
   ],
   bootstrap: [AppComponent],
