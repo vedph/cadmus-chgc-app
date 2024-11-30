@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
@@ -120,214 +120,202 @@ import {
   CADMUS_TEXT_ED_SERVICE_OPTIONS_TOKEN,
 } from '@myrmidon/cadmus-text-ed';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginPageComponent,
-    ManageUsersPageComponent,
-    RegisterUserPageComponent,
-    ResetPasswordComponent,
-    GalleryOptionsComponent,
-    ExportGroupComponent,
-    ImportGroupComponent,
-    ImportThesauriComponent,
-  ],
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    HttpClientModule,
-    // routing
-    AppRoutingModule,
-    // material
-    ClipboardModule,
-    DragDropModule,
-    MatAutocompleteModule,
-    MatBadgeModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSlideToggleModule,
-    MatSliderModule,
-    MatSnackBarModule,
-    MatTableModule,
-    MatTabsModule,
-    MatTooltipModule,
-    MatToolbarModule,
-    MatTreeModule,
-    // vendors
-    NgeMonacoModule.forRoot({}),
-    NgeMarkdownModule,
-    // myrmidon
-    NgToolsModule,
-    NgMatToolsModule,
-    AuthJwtLoginModule,
-    AuthJwtAdminModule,
-    // cadmus bricks
-    DocReferencesComponent,
-    HistoricalDateComponent,
-    AssertedCompositeIdComponent,
-    AssertedCompositeIdsComponent,
-    // cadmus
-    CadmusApiModule,
-    CadmusCoreModule,
-    ImgAnnotatorDirective,
-    ImgAnnotatorToolbarComponent,
-    GalleryListComponent,
-    GalleryFilterComponent,
-    RefLookupComponent,
-    FlagsPickerComponent,
-    CadmusProfileCoreModule,
-    CadmusStateModule,
-    CadmusUiModule,
-    CadmusUiPgModule,
-    CadmusGraphPgModule,
-    CadmusGraphUiModule,
-    CadmusItemEditorModule,
-    CadmusItemListModule,
-    CadmusItemSearchModule,
-    CadmusThesaurusEditorModule,
-    CadmusThesaurusListModule,
-    CadmusThesaurusUiModule,
-  ],
-  providers: [
-    // dialog default
-    {
-      provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: {
-        hasBackdrop: true,
-        maxHeight: '800px',
-      },
-    },
-    // environment service
-    EnvServiceProvider,
-    // parts and fragments type IDs to editor group keys mappings
-    // https://github.com/nrwl/nx/issues/208#issuecomment-384102058
-    // inject like: @Inject('partEditorKeys') partEditorKeys: PartEditorKeys
-    {
-      provide: 'partEditorKeys',
-      useValue: PART_EDITOR_KEYS,
-    },
-    // index lookup definitions
-    {
-      provide: 'indexLookupDefinitions',
-      useValue: INDEX_LOOKUP_DEFINITIONS,
-    },
-    // item browsers IDs to editor keys mappings
-    // inject like: @Inject('itemBrowserKeys') itemBrowserKeys: { [key: string]: string }
-    {
-      provide: 'itemBrowserKeys',
-      useValue: ITEM_BROWSER_KEYS,
-    },
-    // HTTP interceptor
-    // https://medium.com/@ryanchenkie_40935/angular-authentication-using-the-http-client-and-http-interceptors-2f9d1540eb8
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthJwtInterceptor,
-      multi: true,
-    },
-    // mock image gallery
-    // {
-    //   provide: IMAGE_GALLERY_SERVICE_KEY,
-    //   useClass: MockGalleryService,
-    // },
-    // {
-    //   provide: IMAGE_GALLERY_OPTIONS_KEY,
-    //   useValue: {
-    //     baseUri: '',
-    //     count: 50,
-    //     width: 300,
-    //     height: 400,
-    //   },
-    // },
-    // IIIF image gallery
-    {
-      provide: IMAGE_GALLERY_SERVICE_KEY,
-      useClass: SimpleIiifGalleryService,
-    },
-    {
-      provide: IMAGE_GALLERY_OPTIONS_KEY,
-      useValue: {
-        id: 'ccc-ms029',
-        baseUri: '',
-        manifestUri:
-          'https://dms-data.stanford.edu/data/manifests/Parker/xj710dc7305/manifest.json',
-        arrayPath: 'sequences[0]/canvases',
-        resourcePath: 'images[0]/resource',
-        labelPath: 'label',
-        width: 300,
-        height: 400,
-        targetWidth: 1024,
-        targetHeight: -1,
-        pageSize: 6,
-        // skip: 6
-      } as SimpleIiifGalleryOptions,
-    },
-    // text editor
-    // provide each single plugin
-    MdBoldCtePlugin,
-    MdItalicCtePlugin,
-    MdEmojiCtePlugin,
-    MdLinkCtePlugin,
-    // provide a factory so that plugins can be instantiated via DI
-    {
-      provide: CADMUS_TEXT_ED_SERVICE_OPTIONS_TOKEN,
-      useFactory: (
-        mdBoldCtePlugin: MdBoldCtePlugin,
-        mdItalicCtePlugin: MdItalicCtePlugin,
-        mdEmojiCtePlugin: MdEmojiCtePlugin,
-        mdLinkCtePlugin: MdLinkCtePlugin
-      ) => {
-        return {
-          plugins: [
-            mdBoldCtePlugin,
-            mdItalicCtePlugin,
-            mdEmojiCtePlugin,
-            mdLinkCtePlugin,
-          ],
-        };
-      },
-      deps: [
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        LoginPageComponent,
+        ManageUsersPageComponent,
+        RegisterUserPageComponent,
+        ResetPasswordComponent,
+        GalleryOptionsComponent,
+        ExportGroupComponent,
+        ImportGroupComponent,
+        ImportThesauriComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        // routing
+        AppRoutingModule,
+        // material
+        ClipboardModule,
+        DragDropModule,
+        MatAutocompleteModule,
+        MatBadgeModule,
+        MatButtonModule,
+        MatCardModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatListModule,
+        MatMenuModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatSlideToggleModule,
+        MatSliderModule,
+        MatSnackBarModule,
+        MatTableModule,
+        MatTabsModule,
+        MatTooltipModule,
+        MatToolbarModule,
+        MatTreeModule,
+        // vendors
+        NgeMonacoModule.forRoot({}),
+        NgeMarkdownModule,
+        // myrmidon
+        NgToolsModule,
+        NgMatToolsModule,
+        AuthJwtLoginModule,
+        AuthJwtAdminModule,
+        // cadmus bricks
+        DocReferencesComponent,
+        HistoricalDateComponent,
+        AssertedCompositeIdComponent,
+        AssertedCompositeIdsComponent,
+        // cadmus
+        CadmusApiModule,
+        CadmusCoreModule,
+        ImgAnnotatorDirective,
+        ImgAnnotatorToolbarComponent,
+        GalleryListComponent,
+        GalleryFilterComponent,
+        RefLookupComponent,
+        FlagsPickerComponent,
+        CadmusProfileCoreModule,
+        CadmusStateModule,
+        CadmusUiModule,
+        CadmusUiPgModule,
+        CadmusGraphPgModule,
+        CadmusGraphUiModule,
+        CadmusItemEditorModule,
+        CadmusItemListModule,
+        CadmusItemSearchModule,
+        CadmusThesaurusEditorModule,
+        CadmusThesaurusListModule,
+        CadmusThesaurusUiModule], providers: [
+        // dialog default
+        {
+            provide: MAT_DIALOG_DEFAULT_OPTIONS,
+            useValue: {
+                hasBackdrop: true,
+                maxHeight: '800px',
+            },
+        },
+        // environment service
+        EnvServiceProvider,
+        // parts and fragments type IDs to editor group keys mappings
+        // https://github.com/nrwl/nx/issues/208#issuecomment-384102058
+        // inject like: @Inject('partEditorKeys') partEditorKeys: PartEditorKeys
+        {
+            provide: 'partEditorKeys',
+            useValue: PART_EDITOR_KEYS,
+        },
+        // index lookup definitions
+        {
+            provide: 'indexLookupDefinitions',
+            useValue: INDEX_LOOKUP_DEFINITIONS,
+        },
+        // item browsers IDs to editor keys mappings
+        // inject like: @Inject('itemBrowserKeys') itemBrowserKeys: { [key: string]: string }
+        {
+            provide: 'itemBrowserKeys',
+            useValue: ITEM_BROWSER_KEYS,
+        },
+        // HTTP interceptor
+        // https://medium.com/@ryanchenkie_40935/angular-authentication-using-the-http-client-and-http-interceptors-2f9d1540eb8
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthJwtInterceptor,
+            multi: true,
+        },
+        // mock image gallery
+        // {
+        //   provide: IMAGE_GALLERY_SERVICE_KEY,
+        //   useClass: MockGalleryService,
+        // },
+        // {
+        //   provide: IMAGE_GALLERY_OPTIONS_KEY,
+        //   useValue: {
+        //     baseUri: '',
+        //     count: 50,
+        //     width: 300,
+        //     height: 400,
+        //   },
+        // },
+        // IIIF image gallery
+        {
+            provide: IMAGE_GALLERY_SERVICE_KEY,
+            useClass: SimpleIiifGalleryService,
+        },
+        {
+            provide: IMAGE_GALLERY_OPTIONS_KEY,
+            useValue: {
+                id: 'ccc-ms029',
+                baseUri: '',
+                manifestUri: 'https://dms-data.stanford.edu/data/manifests/Parker/xj710dc7305/manifest.json',
+                arrayPath: 'sequences[0]/canvases',
+                resourcePath: 'images[0]/resource',
+                labelPath: 'label',
+                width: 300,
+                height: 400,
+                targetWidth: 1024,
+                targetHeight: -1,
+                pageSize: 6,
+                // skip: 6
+            } as SimpleIiifGalleryOptions,
+        },
+        // text editor
+        // provide each single plugin
         MdBoldCtePlugin,
         MdItalicCtePlugin,
         MdEmojiCtePlugin,
         MdLinkCtePlugin,
-      ],
-    },
-    // monaco bindings for plugins
-    // 2080 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB;
-    // 2087 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyI;
-    // 2083 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyE;
-    // 2090 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyL;
-    {
-      provide: CADMUS_TEXT_ED_BINDINGS_TOKEN,
-      useValue: {
-        2080: 'md.bold', // Ctrl+B
-        2087: 'md.italic', // Ctrl+I
-        2083: 'md.emoji', // Ctrl+E
-        2090: 'md.link', // Ctrl+L
-      },
-    },
-  ],
-  bootstrap: [AppComponent],
-})
+        // provide a factory so that plugins can be instantiated via DI
+        {
+            provide: CADMUS_TEXT_ED_SERVICE_OPTIONS_TOKEN,
+            useFactory: (mdBoldCtePlugin: MdBoldCtePlugin, mdItalicCtePlugin: MdItalicCtePlugin, mdEmojiCtePlugin: MdEmojiCtePlugin, mdLinkCtePlugin: MdLinkCtePlugin) => {
+                return {
+                    plugins: [
+                        mdBoldCtePlugin,
+                        mdItalicCtePlugin,
+                        mdEmojiCtePlugin,
+                        mdLinkCtePlugin,
+                    ],
+                };
+            },
+            deps: [
+                MdBoldCtePlugin,
+                MdItalicCtePlugin,
+                MdEmojiCtePlugin,
+                MdLinkCtePlugin,
+            ],
+        },
+        // monaco bindings for plugins
+        // 2080 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyB;
+        // 2087 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyI;
+        // 2083 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyE;
+        // 2090 = monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyL;
+        {
+            provide: CADMUS_TEXT_ED_BINDINGS_TOKEN,
+            useValue: {
+                2080: 'md.bold', // Ctrl+B
+                2087: 'md.italic', // Ctrl+I
+                2083: 'md.emoji', // Ctrl+E
+                2090: 'md.link', // Ctrl+L
+            },
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}

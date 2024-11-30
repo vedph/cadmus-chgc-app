@@ -12,16 +12,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^17.3.7",
-    "@angular/cdk": "^17.3.7",
-    "@angular/common": "^17.3.7",
-    "@angular/compiler": "^17.3.7",
-    "@angular/core": "^17.3.7",
-    "@angular/forms": "^17.3.7",
-    "@angular/material": "^17.3.7",
-    "@angular/platform-browser": "^17.3.7",
-    "@angular/platform-browser-dynamic": "^17.3.7",
-    "@angular/router": "^17.3.7",
+    "@angular/animations": "^19.0.1",
+    "@angular/cdk": "^18.2.14",
+    "@angular/common": "^19.0.1",
+    "@angular/compiler": "^19.0.1",
+    "@angular/core": "^18.2.13",
+    "@angular/forms": "^19.0.1",
+    "@angular/material": "^18.2.14",
+    "@angular/platform-browser": "^19.0.1",
+    "@angular/platform-browser-dynamic": "^19.0.1",
+    "@angular/router": "^19.0.1",
     "@auth0/angular-jwt": "^5.2.0",
     "@cisstech/nge": "^17.7.1",
     "@myrmidon/auth-jwt-admin": "^4.0.0",
@@ -79,13 +79,13 @@
     "monaco-editor": "^0.48.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
-    "zone.js": "~0.14.5"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.3.6",
-    "@angular/cli": "~17.3.6",
-    "@angular/compiler-cli": "^17.3.7",
-    "@angular/localize": "^17.3.7",
+    "@angular-devkit/build-angular": "^18.2.12",
+    "@angular/cli": "~18.2.12",
+    "@angular/compiler-cli": "^19.0.1",
+    "@angular/localize": "^19.0.1",
     "@types/jasmine": "~5.1.4",
     "@types/marked": "^6.0.0",
     "jasmine-core": "~5.1.2",
@@ -94,7 +94,7 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "ng-packagr": "^17.3.0",
-    "typescript": "~5.4.5"
+    "ng-packagr": "^18.2.1",
+    "typescript": "~5.6.3"
   }
 }
