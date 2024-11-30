@@ -16,11 +16,6 @@ import { NgToolsValidators } from '@myrmidon/ng-tools';
 import { AuthJwtService } from '@myrmidon/auth-jwt-login';
 import { EditedObject, ModelEditorComponentBase } from '@myrmidon/cadmus-ui';
 import { ThesauriSet, ThesaurusEntry } from '@myrmidon/cadmus-core';
-import {
-  GalleryOptionsService,
-  GalleryService,
-  IMAGE_GALLERY_SERVICE_KEY,
-} from '@myrmidon/cadmus-img-gallery';
 import { GalleryImage, ListAnnotation } from '@myrmidon/cadmus-img-annotator';
 
 import {
@@ -38,6 +33,7 @@ import {
   selector: 'cadmus-chgc-image-annotations-part',
   templateUrl: './chgc-image-annotations-part.component.html',
   styleUrls: ['./chgc-image-annotations-part.component.css'],
+  standalone: false,
 })
 export class ChgcImageAnnotationsPartComponent
   extends ModelEditorComponentBase<ChgcImageAnnotationsPart>
@@ -60,7 +56,7 @@ export class ChgcImageAnnotationsPartComponent
 
   constructor(
     authService: AuthJwtService,
-    formBuilder: FormBuilder,
+    formBuilder: FormBuilder
     // @Inject(IMAGE_GALLERY_SERVICE_KEY)
     // private _galleryService: GalleryService,
     // private _options: GalleryOptionsService

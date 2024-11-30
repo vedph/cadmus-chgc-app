@@ -15,6 +15,7 @@ import { GroupRefLookupService } from '../services/group-ref-lookup.service';
   selector: 'app-export-group',
   templateUrl: './export-group.component.html',
   styleUrls: ['./export-group.component.css'],
+  standalone: false,
 })
 export class ExportGroupComponent implements OnDestroy {
   private readonly _disposables: monaco.IDisposable[] = [];
@@ -51,8 +52,7 @@ export class ExportGroupComponent implements OnDestroy {
       wordWrap: 'on',
       automaticLayout: true,
     });
-    this._model =
-    this._model || monaco.editor.createModel('', 'xml');
+    this._model = this._model || monaco.editor.createModel('', 'xml');
     editor.setModel(this._model);
     this._editorModel = editor as monaco.editor.IStandaloneCodeEditor;
 

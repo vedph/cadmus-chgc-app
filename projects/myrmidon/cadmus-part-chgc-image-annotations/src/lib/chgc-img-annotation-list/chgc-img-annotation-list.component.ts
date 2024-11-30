@@ -7,6 +7,7 @@ import { ChgcAnnotationPayload } from '../chgc-image-annotations';
   selector: 'cadmus-chgc-img-annotation-list',
   templateUrl: './chgc-img-annotation-list.component.html',
   styleUrls: ['./chgc-img-annotation-list.component.css'],
+  standalone: false,
 })
 export class ChgcImgAnnotationListComponent extends ImgAnnotationListComponent<ChgcAnnotationPayload> {
   public selectAnnotation(annotation: any): void {

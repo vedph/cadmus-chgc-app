@@ -20,6 +20,7 @@ import { AnnotationThesauriService } from './annotation-thesauri.service';
   templateUrl: './chgc-image-annotation.component.html',
   styleUrls: ['./chgc-image-annotation.component.css'],
   providers: [IdLookupService],
+  standalone: false,
 })
 export class ChgcImageAnnotationComponent implements OnInit {
   private _annotation: ListAnnotation<ChgcAnnotationPayload> | undefined;

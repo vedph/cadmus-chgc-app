@@ -19,15 +19,10 @@
             "index": "src/index.html",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/env.js",
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/env.js", "src/favicon.ico", "src/assets"],
             "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/@recogito/annotorious/dist/annotorious.min.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": ["node_modules/marked/marked.min.js"],
             "sourceMap": {
@@ -35,7 +30,12 @@
               "hidden": false,
               "vendor": true
             },
-            "browser": "src/main.ts"
+            "browser": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "diff-match-patch",
+              "@recogito/annotorious",
+              "@recogito/annotorious-selector-pack"
+            ]
           },
           "configurations": {
             "production": {
@@ -86,10 +86,7 @@
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }
@@ -120,10 +117,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/myrmidon/cadmus-part-chgc-image-annotations/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
@@ -153,10 +147,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/myrmidon/cadmus-part-chgc-pg/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }

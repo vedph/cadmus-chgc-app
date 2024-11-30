@@ -36,6 +36,7 @@ import { ChgcImageAnnotationDialogComponent } from '../chgc-image-annotation-dia
   selector: 'cadmus-chgc-gallery-img-annotator',
   templateUrl: './chgc-gallery-img-annotator.component.html',
   styleUrls: ['./chgc-gallery-img-annotator.component.css'],
+  standalone: false,
 })
 export class ChgcGalleryImgAnnotatorComponent implements OnInit, OnDestroy {
   private _sub?: Subscription;

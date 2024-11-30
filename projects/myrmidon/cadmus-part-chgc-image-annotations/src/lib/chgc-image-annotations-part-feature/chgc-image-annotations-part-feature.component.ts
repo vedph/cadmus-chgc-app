@@ -9,6 +9,7 @@ import { ItemService, ThesaurusService } from '@myrmidon/cadmus-api';
   selector: 'cadmus-chgc-image-annotations-part-feature',
   templateUrl: './chgc-image-annotations-part-feature.component.html',
   styleUrls: ['./chgc-image-annotations-part-feature.component.css'],
+  standalone: false,
 })
 export class ChgcImageAnnotationsPartFeatureComponent
   extends EditPartFeatureBase

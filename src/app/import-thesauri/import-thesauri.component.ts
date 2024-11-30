@@ -20,6 +20,7 @@ interface UploadResult {
   selector: 'app-import-thesauri',
   templateUrl: './import-thesauri.component.html',
   styleUrls: ['./import-thesauri.component.css'],
+  standalone: false,
 })
 export class ImportThesauriComponent {
   private _uploadRequest?: HttpRequest<any>;

@@ -46,6 +46,9 @@ Naples (version `0.0.2-na`): <https://www.dante.unina.it/images/ms/CNMD000026330
 
 ## History
 
+### 4.0.0
+
+- 2024-11-30: ⚠️ upgraded to Angular 19.
 - 2024-05-06:
   - updated Angular.
   - added text editor plugins configuration.

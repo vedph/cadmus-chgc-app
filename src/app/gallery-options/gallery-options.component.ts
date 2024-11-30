@@ -21,6 +21,7 @@ export interface ChgcGalleryOptions extends SimpleIiifGalleryOptions {
   selector: 'app-gallery-options',
   templateUrl: './gallery-options.component.html',
   styleUrls: ['./gallery-options.component.css'],
+  standalone: false,
 })
 export class GalleryOptionsComponent {
   public source: FormControl<ThesaurusEntry | null>;

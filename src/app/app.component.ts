@@ -4,11 +4,7 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
-import {
-  AuthJwtService,
-  GravatarService,
-  User,
-} from '@myrmidon/auth-jwt-login';
+import { AuthJwtService, User } from '@myrmidon/auth-jwt-login';
 import { EnvService } from '@myrmidon/ng-tools';
 import { AppRepository } from '@myrmidon/cadmus-state';
 import {
@@ -21,6 +17,7 @@ import { ChgcGalleryOptions } from './gallery-options/gallery-options.component'
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {
   private _authSub?: Subscription;
@@ -36,7 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject('itemBrowserKeys')
     private _itemBrowserKeys: { [key: string]: string },
     private _authService: AuthJwtService,
-    private _gravatarService: GravatarService,
     private _appRepository: AppRepository,
     private _router: Router,
     env: EnvService,
@@ -77,10 +73,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public getItemBrowserRoute(id: string): string {
     return this._itemBrowserKeys[id] || id;
-  }
-
-  public getGravatarUrl(email: string, size = 80): string | null {
-    return this._gravatarService.buildGravatarUrl(email, size);
   }
 
   public logout(): void {

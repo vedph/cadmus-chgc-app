@@ -1,6 +1,6 @@
 {
   "name": "@myrmidon/cadmus-part-chgc-image-annotations",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Cadmus CHGC components - image annotations.",
   "keywords": [
     "Cadmus"
@@ -14,16 +14,16 @@
     "name": "Daniele Fusi"
   },
   "peerDependencies": {
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
-    "@myrmidon/cadmus-img-annotator": "5.0.0",
-    "@myrmidon/cadmus-img-gallery": "^5.0.0",
-    "@myrmidon/cadmus-refs-asserted-ids": "^5.0.1",
-    "@myrmidon/cadmus-refs-doc-references": "^5.0.1",
-    "@myrmidon/cadmus-refs-lookup": "^5.0.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0",
+    "@myrmidon/cadmus-img-annotator": "5.1.0",
+    "@myrmidon/cadmus-img-gallery": "^5.1.2",
+    "@myrmidon/cadmus-refs-asserted-ids": "^5.1.7",
+    "@myrmidon/cadmus-refs-doc-references": "^5.1.1",
+    "@myrmidon/cadmus-refs-lookup": "^5.1.2"
   },
   "dependencies": {
-    "tslib": "^2.5.0"
+    "tslib": "^2.3.0"
   },
   "sideEffects": false
 }

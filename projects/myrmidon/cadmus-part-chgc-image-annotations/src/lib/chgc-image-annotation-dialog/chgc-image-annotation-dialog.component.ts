@@ -8,6 +8,7 @@ import { ChgcAnnotationPayload } from '../chgc-image-annotations';
   selector: 'cadmus-chgc-image-annotation-dialog',
   templateUrl: './chgc-image-annotation-dialog.component.html',
   styleUrls: ['./chgc-image-annotation-dialog.component.css'],
+  standalone: false,
 })
 export class ChgcImageAnnotationDialogComponent {
   constructor(

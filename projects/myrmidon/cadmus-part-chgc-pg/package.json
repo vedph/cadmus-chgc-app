@@ -1,6 +1,6 @@
 {
   "name": "@myrmidon/cadmus-part-chgc-pg",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Cadmus CHGC components - editor wrappers.",
   "keywords": [
     "Cadmus"
@@ -14,11 +14,11 @@
     "name": "Daniele Fusi"
   },
   "peerDependencies": {
-    "@angular/common": "^16.0.0",
-    "@angular/core": "^16.0.0"
+    "@angular/common": "^19.0.0",
+    "@angular/core": "^19.0.0"
   },
   "dependencies": {
-    "tslib": "^2.5.0"
+    "tslib": "^2.3.0"
   },
   "sideEffects": false
 }
